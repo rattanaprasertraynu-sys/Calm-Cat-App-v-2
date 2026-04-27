@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
-import { detectEmotion } from "@/lib/emotion";
-import { getReplySmart } from "@/lib/getReply";
+import { detectEmotion } from "../../../lib/emotion";
+import { getReplySmart } from "../../../lib/getReply";
 
 const emotionMap: any = {
   STRESSED: "sit_tail",
