@@ -17,5 +17,4 @@ export function getReplySmart(emotion: Emotion, message: string): string {
   // ถ้าสั้น = สุ่ม
   return list[Math.floor(Math.random() * list.length)];
 }
-แล้วเปลี่ยนใน API:
-const reply = getReplySmart(emotion, message);
+
