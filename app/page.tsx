@@ -2,8 +2,13 @@
 
 import { useState, useEffect } from "react";
 
+type Message = {
+  role: "user" | "cat";
+  text: string;
+};
+
 export default function Home() {
-  const [messages, setMessages] = useState<{ role: string; text: string }[]>([]);
+  const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
 
   const [animation, setAnimation] = useState("cat_neutral");
@@ -12,8 +17,9 @@ export default function Home() {
 
   const [isAnimating, setIsAnimating] = useState(false);
   const [showHearts, setShowHearts] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
-  // ⏱️ idle
+  // ⏱️ idle → กลับไป idle ถ้าไม่มี activity
   useEffect(() => {
     const timer = setTimeout(() => {
       if (!animation.includes("reward")) {
@@ -24,7 +30,7 @@ export default function Home() {
     return () => clearTimeout(timer);
   }, [messages, animation]);
 
-  // 📊 visits
+  // 📊 visits counter
   useEffect(() => {
     const count = localStorage.getItem("visits");
     const newCount = count ? Number(count) + 1 : 1;
@@ -33,27 +39,63 @@ export default function Home() {
     setVisits(newCount);
   }, []);
 
+  // 💬 send message
   const sendMessage = async () => {
-    if (!input) return;
+    if (!input || isLoading) return;
+
+    const userMessage: Message = { role: "user", text: input };
+
+    // ✅ show user instantly
+    setMessages((prev) => [...prev, userMessage]);
+    setInput("");
+    setIsLoading(true);
+    setAnimation("cat_idle");
 
     try {
-      const userMessage = { role: "user", text: input };
-      setMessages((prev) => [...prev, userMessage]);
-
       const res = await fetch("/api/chat", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ message: input }),
+        body: JSON.stringify({ message: userMessage.text }),
       });
+
+      if (!res.ok) throw new Error("API error");
 
       const data = await res.json();
 
-      const botMessage = { role: "cat", text: data.reply };
-      setMessages((prev) => [...prev, botMessage]);
+      const botMessage: Message = {
+        role: "cat",
+        text: data.reply || "เมี๊ยว… เราคิดไม่ออกแฮะ",
+      };
 
-      const map: any = {
+      // ✅ update safely
+      setMessages((prev) => {
+        let newMessages = [...prev, botMessage];
+
+        // 🎁 reward trigger
+        if (!showReward && newMessages.length >= 6) {
+          setShowReward(true);
+
+          const rewardTexts = [
+            "เลาดีใจจนหางสั่น! วันนี้พิเศษ... ให้เกาพุง 1 ครั้งถ้วน!",
+            "เลาดีใจที่นุดมาหา... ให้ลูบหัว 1 ทีเยย",
+          ];
+
+          const randomText =
+            rewardTexts[Math.floor(Math.random() * rewardTexts.length)];
+
+          newMessages.push({
+            role: "cat",
+            text: randomText,
+          });
+        }
+
+        return newMessages;
+      });
+
+      // 🎭 animation mapping
+      const map: Record<string, string> = {
         STRESSED: "cat_stress",
         SAD: "cat_sad",
         LONELY: "cat_idle",
@@ -62,69 +104,66 @@ export default function Home() {
       };
 
       setAnimation(map[data.emotion] || "cat_idle");
-
-      // 🎁 reward
-      if (!showReward && messages.length + 1 >= 4) {
-        setShowReward(true);
-
-        const rewardTexts = [
-          "เลาดีใจจนหางสั่น! วันนี้พิเศษ... ให้เกาพุง 1 ครั้งถ้วน!",
-          "เลาดีใจที่นุดมาหา... ให้ลูบหัว 1 ทีเยย",
-        ];
-
-        const randomText =
-          rewardTexts[Math.floor(Math.random() * rewardTexts.length)];
-
-        setMessages((prev) => [
-          ...prev,
-          { role: "cat", text: randomText },
-        ]);
-      }
-
-      setInput("");
     } catch (err) {
       console.error(err);
+
+      // ❗ fallback message
+      setMessages((prev) => [
+        ...prev,
+        {
+          role: "cat",
+          text: "เมี๊ยว… ตอนนี้เรางงนิดหน่อย ลองใหม่อีกทีนะ",
+        },
+      ]);
+
+      setAnimation("cat_sad");
+    } finally {
+      setIsLoading(false);
     }
   };
 
-  // 🐾 ลูบแมว
+  // 🐾 pet interaction
   const handlePet = () => {
-    const random = Math.random();
+    const isHead = Math.random() > 0.5;
 
-    if (random > 0.5) {
-      setAnimation("cat_reward_head");
-    } else {
-      setAnimation("cat_reward_belly");
-    }
+    setAnimation(isHead ? "cat_reward_head" : "cat_reward_belly");
 
-    // 🐱 เด้ง
+    // 🐱 bounce
     setIsAnimating(true);
     setTimeout(() => setIsAnimating(false), 300);
 
-    // 💗 หัวใจ
+    // 💗 hearts
     setShowHearts(true);
     setTimeout(() => setShowHearts(false), 1000);
 
-    // 🎵 เสียง (มีหรือไม่มีไฟล์ก็ไม่พัง)
+    // 🎵 sound (optional)
     const audio = new Audio("/purr.mp3");
     audio.volume = 0.3;
     audio.play().catch(() => {});
 
-    // 🔁 กลับ happy
+    // 🔁 back to happy
     setTimeout(() => {
       setAnimation("cat_happy");
     }, 2000);
   };
 
   return (
-    <main style={{ padding: 20, fontFamily: "sans-serif", textAlign: "center" }}>
+    <main
+      style={{
+        padding: 20,
+        fontFamily: "sans-serif",
+        textAlign: "center",
+        maxWidth: 500,
+        margin: "0 auto",
+      }}
+    >
       {/* 🐱 Header */}
-      <h1 style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 10 }}>
-        <img src="/cat/cat_neutral.png" width={40} style={{ borderRadius: "50%" }} />
+      <h1 style={{ display: "flex", justifyContent: "center", gap: 10 }}>
+        <img src="/cat/cat_neutral.png" width={40} />
         Calm Cat
       </h1>
 
-      {/* 🐱 แมว */}
+      {/* 🐱 Cat */}
       <div style={{ position: "relative" }}>
         <img
           src={`/cat/${animation}.png`}
@@ -137,19 +176,19 @@ export default function Home() {
           style={{
             cursor: "pointer",
             transform: isAnimating ? "scale(1.1)" : "scale(1)",
-            transition: "transform 0.2s ease",
+            transition: "0.2s",
           }}
         />
 
-        {/* 💗 หัวใจ */}
+        {/* 💗 hearts */}
         {showHearts && (
           <div style={{ position: "absolute", left: "50%", top: 0 }}>
-            <div style={{ fontSize: 24, animation: "floatUp 1s ease-out" }}>💗</div>
+            <div style={{ animation: "floatUp 1s ease-out" }}>💗</div>
           </div>
         )}
       </div>
 
-      {/* 🏆 แมวพิเศษ */}
+      {/* 🏆 unlock */}
       {visits >= 5 && (
         <div>
           <p>นุด… กลับมาบ่อยจัง เราเริ่มชอบแล้วนะ 🐱</p>
@@ -164,6 +203,8 @@ export default function Home() {
             <b>{m.role === "user" ? "คุณ" : "แมว"}:</b> {m.text}
           </div>
         ))}
+
+        {isLoading && <div>แมวกำลังคิด… 🐱💭</div>}
       </div>
 
       {/* ✏️ input */}
@@ -172,9 +213,16 @@ export default function Home() {
         onChange={(e) => setInput(e.target.value)}
         placeholder="พิมพ์ความรู้สึกของคุณ..."
         style={{ padding: 10, width: "70%" }}
+        onKeyDown={(e) => {
+          if (e.key === "Enter") sendMessage();
+        }}
       />
 
-      <button onClick={sendMessage} style={{ padding: 10 }}>
+      <button
+        onClick={sendMessage}
+        style={{ padding: 10 }}
+        disabled={isLoading}
+      >
         ส่ง
       </button>
 
@@ -201,3 +249,4 @@ export default function Home() {
     </main>
   );
 }
+
