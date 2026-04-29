@@ -12,9 +12,21 @@ export default function Home() {
   // 🎁 reward
   const [showReward, setShowReward] = useState(false);
 
-  // 📊 visits (ย้ายมาไว้ตรงนี้)
+  // 📊 visits
   const [visits, setVisits] = useState(0);
 
+  // ⏱️ idle timer
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (!animation.includes("reward")) {
+        setAnimation("cat_idle");
+      }
+    }, 10000);
+
+    return () => clearTimeout(timer);
+  }, [messages, animation]);
+
+  // 📊 นับจำนวนครั้งเข้าใช้งาน
   useEffect(() => {
     const count = localStorage.getItem("visits");
     const newCount = count ? Number(count) + 1 : 1;
@@ -40,17 +52,19 @@ export default function Home() {
     const botMessage = { role: "cat", text: data.reply };
     setMessages((prev) => [...prev, botMessage]);
 
+    // 🎭 emotion → animation
     const map: any = {
       STRESSED: "cat_stress",
       SAD: "cat_sad",
       LONELY: "cat_idle",
       POSITIVE: "cat_happy",
-      NEUTRAL: "cat_idle",
+      NEUTRAL: "cat_neutral",
     };
 
     setAnimation(map[data.emotion] || "cat_idle");
 
-    if (messages.length >= 4) {
+    // 🎁 reward (กันเด้งซ้ำ + fix length)
+    if (!showReward && messages.length + 1 >= 4) {
       setShowReward(true);
 
       const rewardTexts = [
@@ -83,11 +97,24 @@ export default function Home() {
     const audio = new Audio("/purr.mp3");
     audio.volume = 0.3;
     audio.play();
+
+    // ⏳ กลับเป็น happy หลัง 2 วิ
+    setTimeout(() => {
+      setAnimation("cat_happy");
+    }, 2000);
   };
 
   return (
     <main style={{ padding: 20, fontFamily: "sans-serif" }}>
-      <h1>🐱 Calm Cat</h1>
+      {/* 🐱 Header */}
+      <h1 style={{ display: "flex", alignItems: "center", gap: 10 }}>
+        <img
+          src="/cat/cat_neutral.png"
+          width={40}
+          style={{ borderRadius: "50%" }}
+        />
+        Calm Cat
+      </h1>
 
       {/* 🐱 แมวหลัก */}
       <img
@@ -97,7 +124,7 @@ export default function Home() {
         style={{ cursor: "pointer" }}
       />
 
-      {/* 🏆 แมวพิเศษ (ย้ายมาอยู่นอก img) */}
+      {/* 🏆 แมวพิเศษ */}
       {visits >= 5 && (
         <div>
           <p>นุด… กลับมาบ่อยจัง เราเริ่มชอบแล้วนะ 🐱</p>
