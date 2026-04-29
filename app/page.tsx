@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 
 type Message = {
   role: "user" | "cat";
@@ -13,14 +13,12 @@ export default function Home() {
 
   const [animation, setAnimation] = useState("cat_neutral");
   const [showReward, setShowReward] = useState(false);
-  const [visits, setVisits] = useState(0);
+  const [rewardGiven, setRewardGiven] = useState(false);
 
+  const [visits, setVisits] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
   const [showHearts, setShowHearts] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-
-  const bottomRef = useRef<HTMLDivElement>(null);
-  const inputRef = useRef<HTMLInputElement>(null);
 
   // ⏱️ idle
   useEffect(() => {
@@ -42,39 +40,24 @@ export default function Home() {
     setVisits(newCount);
   }, []);
 
-  // 📜 auto scroll + focus
-  useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
-    inputRef.current?.focus();
-  }, [messages, isLoading]);
-
   // 💬 send message
   const sendMessage = async () => {
-    if (!input.trim() || isLoading) return;
+    if (!input || isLoading || showReward) return;
 
     const userMessage: Message = { role: "user", text: input };
 
     setMessages((prev) => [...prev, userMessage]);
     setInput("");
     setIsLoading(true);
-    setAnimation("cat_idle");
 
     try {
-      const controller = new AbortController();
-      const timeout = setTimeout(() => controller.abort(), 10000);
-
       const res = await fetch("/api/chat", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ message: userMessage.text }),
-        signal: controller.signal,
       });
-
-      clearTimeout(timeout);
-
-      if (!res.ok) throw new Error("API error");
 
       const data = await res.json();
 
@@ -84,10 +67,11 @@ export default function Home() {
       };
 
       setMessages((prev) => {
-        let newMessages = [...prev, botMessage];
+        const newMessages = [...prev, botMessage];
 
-        // 🎁 reward
-        if (!showReward && newMessages.length >= 6) {
+        // 🎁 trigger reward ครั้งเดียว
+        if (!rewardGiven && newMessages.length >= 6) {
+          setRewardGiven(true);
           setShowReward(true);
 
           const rewardTexts = [
@@ -98,10 +82,10 @@ export default function Home() {
           const randomText =
             rewardTexts[Math.floor(Math.random() * rewardTexts.length)];
 
-          newMessages.push({
-            role: "cat",
-            text: randomText,
-          });
+          return [
+            ...newMessages,
+            { role: "cat", text: randomText },
+          ];
         }
 
         return newMessages;
@@ -117,16 +101,10 @@ export default function Home() {
 
       setAnimation(map[data.emotion] || "cat_idle");
     } catch (err) {
-      console.error(err);
-
       setMessages((prev) => [
         ...prev,
-        {
-          role: "cat",
-          text: "เมี๊ยว… ตอนนี้เราตอบไม่ได้ ลองใหม่อีกทีนะ",
-        },
+        { role: "cat", text: "เมี๊ยว… ลองใหม่อีกทีนะ" },
       ]);
-
       setAnimation("cat_sad");
     } finally {
       setIsLoading(false);
@@ -149,28 +127,20 @@ export default function Home() {
     audio.volume = 0.3;
     audio.play().catch(() => {});
 
+    // ✅ reset flow หลัง reward
     setTimeout(() => {
       setAnimation("cat_happy");
+      setShowReward(false);
     }, 2000);
   };
 
   return (
-    <main
-      style={{
-        padding: 20,
-        fontFamily: "sans-serif",
-        textAlign: "center",
-        maxWidth: 500,
-        margin: "0 auto",
-      }}
-    >
-      {/* 🐱 Header */}
-      <h1 style={{ display: "flex", justifyContent: "center", gap: 10 }}>
-        <img src="/cat/cat_neutral.png" width={40} />
-        Calm Cat
+    <main style={{ padding: 20, textAlign: "center", maxWidth: 500, margin: "0 auto" }}>
+      <h1>
+        <img src="/cat/cat_neutral.png" width={40} /> Calm Cat
       </h1>
 
-      {/* 🐱 Cat */}
+      {/* 🐱 cat */}
       <div style={{ position: "relative" }}>
         <img
           src={`/cat/${animation}.png`}
@@ -183,13 +153,12 @@ export default function Home() {
           style={{
             cursor: "pointer",
             transform: isAnimating ? "scale(1.1)" : "scale(1)",
-            transition: "0.2s",
           }}
         />
 
         {showHearts && (
           <div style={{ position: "absolute", left: "50%", top: 0 }}>
-            <div style={{ animation: "floatUp 1s ease-out" }}>💗</div>
+            💗
           </div>
         )}
       </div>
@@ -197,68 +166,41 @@ export default function Home() {
       {/* 🏆 unlock */}
       {visits >= 5 && (
         <div>
-          <p>นุด… กลับมาบ่อยจัง เราเริ่มชอบแล้วนะ 🐱</p>
+          <p>นุด… กลับมาบ่อยจัง 🐱</p>
           <img src="/cat/cat_special.png" width={120} />
         </div>
       )}
 
       {/* 💬 chat */}
-      <div
-        style={{
-          minHeight: 300,
-          maxHeight: 300,
-          overflowY: "auto",
-          marginBottom: 20,
-          textAlign: "left",
-        }}
-      >
+      <div style={{ minHeight: 300, textAlign: "left" }}>
         {messages.map((m, i) => (
           <div key={i}>
             <b>{m.role === "user" ? "คุณ" : "แมว"}:</b> {m.text}
           </div>
         ))}
 
-        {isLoading && <div>แมวกำลังคิด… 🐱💭</div>}
-
-        <div ref={bottomRef} />
+        {isLoading && <div>แมวกำลังคิด…</div>}
       </div>
 
-      {/* ✏️ input */}
       <input
-        ref={inputRef}
         value={input}
         onChange={(e) => setInput(e.target.value)}
-        placeholder="พิมพ์ความรู้สึกของคุณ..."
-        style={{ padding: 10, width: "70%" }}
-        onKeyDown={(e) => {
-          if (e.key === "Enter") sendMessage();
-        }}
+        onKeyDown={(e) => e.key === "Enter" && sendMessage()}
       />
 
-      <button onClick={sendMessage} style={{ padding: 10 }}>
+      <button onClick={sendMessage} disabled={isLoading || showReward}>
         ส่ง
       </button>
 
       {/* 🐾 reward */}
       {showReward && (
-        <div style={{ marginTop: 20 }}>
-          <p>มานี่… เราจะให้รางวัลนุด 🐾</p>
-
+        <div>
+          <p>มานี่… 🐾</p>
           <button onClick={handlePet}>
             <img src="/cat/paw.png" width={70} />
           </button>
         </div>
       )}
-
-      {/* ✨ animation */}
-      <style>
-        {`
-          @keyframes floatUp {
-            0% { transform: translateY(0); opacity: 1; }
-            100% { transform: translateY(-50px); opacity: 0; }
-          }
-        `}
-      </style>
     </main>
   );
 }
