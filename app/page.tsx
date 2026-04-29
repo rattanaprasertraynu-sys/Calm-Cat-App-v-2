@@ -1,15 +1,6 @@
 "use client";
 
-import { useState } from "react";
-const [visits, setVisits] = useState(0);
-useEffect(() => {
-  const count = localStorage.getItem("visits");
-
-  const newCount = count ? Number(count) + 1 : 1;
-
-  localStorage.setItem("visits", newCount.toString());
-  setVisits(newCount);
-}, []);
+import { useState, useEffect } from "react";
 
 export default function Home() {
   const [messages, setMessages] = useState<{ role: string; text: string }[]>([]);
@@ -20,6 +11,17 @@ export default function Home() {
 
   // 🎁 reward
   const [showReward, setShowReward] = useState(false);
+
+  // 📊 visits (ย้ายมาไว้ตรงนี้)
+  const [visits, setVisits] = useState(0);
+
+  useEffect(() => {
+    const count = localStorage.getItem("visits");
+    const newCount = count ? Number(count) + 1 : 1;
+
+    localStorage.setItem("visits", newCount.toString());
+    setVisits(newCount);
+  }, []);
 
   // 💬 ส่งข้อความ
   const sendMessage = async () => {
@@ -38,7 +40,6 @@ export default function Home() {
     const botMessage = { role: "cat", text: data.reply };
     setMessages((prev) => [...prev, botMessage]);
 
-    // 🎭 เปลี่ยนหน้าแมวตาม emotion
     const map: any = {
       STRESSED: "cat_stress",
       SAD: "cat_sad",
@@ -49,11 +50,9 @@ export default function Home() {
 
     setAnimation(map[data.emotion] || "cat_idle");
 
-    // 🎁 trigger reward
     if (messages.length >= 4) {
       setShowReward(true);
 
-      // 🐱 random ข้อความแมว (แนวเจ้านาย 😼)
       const rewardTexts = [
         "เลาดีใจจนหางสั่น! วันนี้พิเศษ... ให้เกาพุง 1 ครั้งถ้วน!",
         "เลาดีใจที่นุดมาหา... ให้ลูบหัว 1 ทีเยย",
@@ -81,7 +80,6 @@ export default function Home() {
       setAnimation("cat_reward_belly");
     }
 
-    // 🎵 เสียง purr
     const audio = new Audio("/purr.mp3");
     audio.volume = 0.3;
     audio.play();
@@ -91,20 +89,21 @@ export default function Home() {
     <main style={{ padding: 20, fontFamily: "sans-serif" }}>
       <h1>🐱 Calm Cat</h1>
 
-      {/* 🐱 แมว */}
+      {/* 🐱 แมวหลัก */}
       <img
         src={`/cat/${animation}.png`}
         width={180}
-{/* 🏆 แมวพิเศษ */}
-{visits >= 5 && (
-<div>
-<p>นุด… กลับมาบ่อยจัง เราเริ่มชอบแล้วนะ 🐱</p>
-<img src="/cat/cat_special.png" width={120} />
-</div>
-)}
-        onClick={() => setAnimation("cat_happy")} // 🐾 tap แล้วขยับ
+        onClick={() => setAnimation("cat_happy")}
         style={{ cursor: "pointer" }}
       />
+
+      {/* 🏆 แมวพิเศษ (ย้ายมาอยู่นอก img) */}
+      {visits >= 5 && (
+        <div>
+          <p>นุด… กลับมาบ่อยจัง เราเริ่มชอบแล้วนะ 🐱</p>
+          <img src="/cat/cat_special.png" width={120} />
+        </div>
+      )}
 
       {/* 💬 chat */}
       <div style={{ minHeight: 300, marginBottom: 20 }}>
@@ -141,4 +140,3 @@ export default function Home() {
     </main>
   );
 }
-
