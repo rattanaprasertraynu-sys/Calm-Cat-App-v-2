@@ -76,7 +76,7 @@ const startPurr = async () => {
 if (!purrRef.current) return;
 const audio = purrRef.current;
 
-```
+
 try {
   await audio.play();
 
@@ -92,7 +92,7 @@ try {
     audio.volume = vol;
   }, 100);
 } catch {}
-```
+
 
 };
 
@@ -100,7 +100,7 @@ const stopPurr = () => {
 if (!purrRef.current) return;
 const audio = purrRef.current;
 
-```
+
 if (fadeRef.current) clearInterval(fadeRef.current);
 
 let vol = audio.volume;
@@ -114,7 +114,7 @@ fadeRef.current = setInterval(() => {
   }
   audio.volume = vol;
 }, 100);
-```
+
 
 };
 
@@ -127,7 +127,7 @@ if (phase === "chat") setAnimation("cat_typing");
 const sendMessage = () => {
 if (!input.trim()) return;
 
-```
+
 stopPurr();
 
 setAnimation("cat_head_bunt_1");
@@ -143,7 +143,7 @@ meow.play().catch(() => {});
 setInput("");
 
 runTimeout(() => setPhase("emotion"), 1200);
-```
+
 
 };
 
@@ -156,7 +156,7 @@ const healingMap: Record<string, string> = {
 ใจฟู: "เย้! จ้มดีใจด้วยนะนุด ใจฟูตามเลย!",
 };
 
-```
+
 const animationMap: Record<string, string> = {
   เหนื่อย: "cat_tired",
   เศร้า: "cat_sad",
@@ -178,7 +178,7 @@ runTimeout(() => {
     setPhase("healing");
   }
 }, 700);
-```
+
 
 };
 
@@ -190,12 +190,12 @@ const endSession = () => {
 setAnimation("cat_idle");
 setPhase("farewell");
 
-```
+
 runTimeout(() => {
   setPhase("splash");
   runTimeout(() => setPhase("greeting"), 2000);
 }, 3000);
-```
+
 
 };
 
@@ -207,7 +207,7 @@ return ( <main style={containerStyle}>
 safe space for your heart 🐾 </p> </div>
 )}
 
-```
+
   {/* 🐱 GREETING */}
   {phase === "greeting" && (
     <div style={{ animation: "fadeIn 1s ease" }}>
