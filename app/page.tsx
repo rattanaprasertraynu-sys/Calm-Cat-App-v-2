@@ -162,7 +162,7 @@ const animationMap: Record<string, string> = {
   เศร้า: "cat_sad",
   ว้าวุ่น: "cat_anxious",
   ปกติ: "cat_normal",
-  ใจฟู: "cat_happy",
+  ใจฟู: "cat_reward_head",
 };
 
 setHealingText(healingMap[emotion]);
