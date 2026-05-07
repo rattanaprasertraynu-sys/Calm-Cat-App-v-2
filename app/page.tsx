@@ -238,15 +238,72 @@ safe space for your heart 🐾 </p> </div>
     </div>
   )}
 
-  {/* 💛 EMOTION */}
-  {phase === "emotion" && (
-    <div>
-      <img src={`/cat/${animation}.png`} width={220} />
-      <button onClick={() => selectEmotion("เหนื่อย")}>
-        เหนื่อย
+ {/* 💛 EMOTION */}
+{phase === "emotion" && (
+  <div
+    style={{
+      animation: "fadeIn 0.6s ease",
+    }}
+  >
+    <img
+      src="/cat/cat_idle.png"
+      width={220}
+    />
+
+    <p
+      style={{
+        marginTop: 16,
+        fontSize: 20,
+        color: "#444",
+      }}
+    >
+      แล้วตอนนี้... ใจนุดเป็นยังไง?
+    </p>
+
+    <div
+      style={{
+        display: "grid",
+        gridTemplateColumns: "1fr 1fr",
+        gap: 12,
+        marginTop: 20,
+        width: 300,
+      }}
+    >
+      {["เหนื่อย", "เศร้า", "ว้าวุ่น", "ปกติ"].map((emotion) => (
+        <button
+          key={emotion}
+          onClick={() => selectEmotion(emotion)}
+          style={{
+            padding: "14px 10px",
+            borderRadius: 18,
+            border: "none",
+            background: "#FFF4E8",
+            fontSize: 16,
+            cursor: "pointer",
+          }}
+        >
+          {emotion}
+        </button>
+      ))}
+    </div>
+
+    <div style={{ marginTop: 12 }}>
+      <button
+        onClick={() => selectEmotion("ใจฟู")}
+        style={{
+          padding: "14px 24px",
+          borderRadius: 18,
+          border: "none",
+          background: "#FFE0E6",
+          fontSize: 16,
+          cursor: "pointer",
+        }}
+      >
+        ใจฟู
       </button>
     </div>
-  )}
+  </div>
+)}
 
   {/* 🌷 HEALING */}
   {phase === "healing" && (
