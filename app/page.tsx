@@ -134,8 +134,8 @@ setAnimation("cat_head_bunt_1");
 
 setTimeout(() => setAnimation("cat_head_bunt_2"), 150);
 setTimeout(() => setAnimation("cat_head_bunt_3"), 300);
-setTimeout(() => setAnimation("cat_love"), 500);
-
+setTimeout(() => setAnimation("cat_head_bunt_3"), 500);
+  
 const meow = new Audio("/meow.wav");
 meow.volume = 0.4;
 meow.play().catch(() => {});
