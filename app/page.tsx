@@ -120,7 +120,7 @@ fadeRef.current = setInterval(() => {
 
 // 🐱 default animation
 useEffect(() => {
-if (phase === "chat") setAnimation("cat_typing");
+if (phase === "chat") setAnimation("cat_idle");
 }, [phase]);
 
 // 💬 send message (FIX แมวโหม่ง)
