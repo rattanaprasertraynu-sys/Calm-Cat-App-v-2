@@ -168,17 +168,9 @@ const animationMap: Record<string, string> = {
 setHealingText(healingMap[emotion]);
 setAnimation(animationMap[emotion]);
 
-runTimeout(() => {
-  if (showReward) {
-    const randomReward =
-      rewards[Math.floor(Math.random() * rewards.length)];
-    setCurrentReward(randomReward);
-    setPhase("reward");
-  } else {
-    setPhase("healing");
-  }
+setTimeout(() => {
+  setPhase("healing");
 }, 700);
-
 
 };
 
