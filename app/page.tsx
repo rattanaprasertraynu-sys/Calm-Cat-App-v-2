@@ -162,7 +162,7 @@ const animationMap: Record<string, string> = {
   เศร้า: "cat_sad",
   ว้าวุ่น: "cat_anxious",
   ปกติ: "cat_normal",
-  ใจฟู: "cat_reward_head",
+  ใจฟู: "cat_happy",
 };
 
 setHealingText(healingMap[emotion]);
@@ -225,9 +225,10 @@ safe space for your heart 🐾 </p> </div>
       <img src={`/cat/${animation}.png`} width={220} />
 
       <input
-        value={input}
-        onChange={(e) => setInput(e.target.value)}
-        onFocus={startPurr}
+  value={input}
+  onChange={(e) => setInput(e.target.value)}
+  onFocus={startPurr}
+  onClick={startPurr}
         onBlur={stopPurr}
         onKeyDown={(e) => e.key === "Enter" && sendMessage()}
       />
