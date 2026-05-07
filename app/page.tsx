@@ -246,9 +246,9 @@ safe space for your heart 🐾 </p> </div>
     }}
   >
     <img
-      src="/cat/cat_idle.png"
-      width={220}
-    />
+  src={`/cat/${animation}.png`}
+  width={220}
+/>
 
     <p
       style={{
