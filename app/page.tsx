@@ -305,14 +305,53 @@ safe space for your heart 🐾 </p> </div>
   </div>
 )}
 
-  {/* 🌷 HEALING */}
-  {phase === "healing" && (
-    <div>
-      <img src={`/cat/${animation}.png`} width={220} />
-      <p>{healingText}</p>
-      <button onClick={endSession}>ไว้เจอกันนะ</button>
-    </div>
-  )}
+ {/* 🌷 HEALING */}
+{phase === "healing" && (
+  <div
+    style={{
+      animation: "fadeIn 0.8s ease",
+      textAlign: "center",
+    }}
+  >
+    <img
+      src={`/cat/${animation}.png`}
+      width={220}
+      style={{
+        animation: "breath 4s ease-in-out infinite",
+      }}
+      onError={(e) => {
+        e.currentTarget.src = "/cat/cat_idle.png";
+      }}
+    />
+
+    <p
+      style={{
+        marginTop: 18,
+        fontSize: 22,
+        color: "#444",
+        lineHeight: 1.6,
+      }}
+    >
+      {healingText}
+    </p>
+
+    <button
+      onClick={endSession}
+      style={{
+        marginTop: 20,
+        padding: "14px 24px",
+        borderRadius: 20,
+        border: "none",
+        background: "#FFE7CC",
+        color: "#444",
+        fontSize: 16,
+        cursor: "pointer",
+      }}
+    >
+      ไว้เจอกันนะ
+    </button>
+  </div>
+)}
 
   {/* 🌙 FAREWELL */}
   {phase === "farewell" && (
