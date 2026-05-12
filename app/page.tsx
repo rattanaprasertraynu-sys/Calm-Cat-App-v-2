@@ -223,7 +223,7 @@ const animationMap: Record<string, string> = {
 
     setTimeout(() => {
       setPhase("healing");
-    }, 700);
+    }, 2200);
   };
 
   const endSession = () => {
@@ -270,14 +270,27 @@ const animationMap: Record<string, string> = {
       {/* 🌟 SPLASH */}
       {phase === "splash" && (
         <div style={{ animation: "fadeIn 1.5s ease" }}>
-          <img src="/logo/calmcat_logo.png" width={220} />
-
-          <p style={{ color: "#999" }}>
-            safe space for your heart 🐾
-          </p>
-        </div>
-      )}
-
+         <video
+  autoPlay
+  muted
+  playsInline
+  style={{
+    width: 260,
+    borderRadius: 24,
+  }}
+>
+  <source
+    src={`/intro/${
+      ["butterfly.mp4", "yarn.mp4", "flower.mp4", "dancing.mp4"][
+        Math.floor(Math.random() * 4)
+      ]
+    }`}
+    type="video/mp4"
+  />
+</video>
+</div>
+)}
+      
       {/* 🐱 GREETING */}
       {phase === "greeting" && (
         <div style={{ animation: "fadeIn 1s ease" }}>
