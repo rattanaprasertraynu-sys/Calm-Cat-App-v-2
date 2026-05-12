@@ -85,6 +85,7 @@ export default function Home() {
   const [input, setInput] = useState("");
   const [animation, setAnimation] = useState("cat_idle");
   const [healingText, setHealingText] = useState("");
+  const [comfortVideo, setComfortVideo] = useState("");
   const [lang, setLang] = useState<"th" | "en">("th");
 
   const t = text[lang];
@@ -190,14 +191,29 @@ export default function Home() {
     setPhase("emotion");
   }, 700);
 };
-  const selectEmotion = (emotion: string) => {
-    const animationMap: Record<string, string> = {
-      tired: "cat_tired",
-      sad: "cat_sad",
-      anxious: "cat_anxious",
-      normal: "cat_normal",
-      happy: "cat_happy",
-    };
+const selectEmotion = (emotion: string) => {
+const animationMap: Record<string, string> = {
+    tired: "cat_tired",
+    sad: "cat_sad",
+    anxious: "cat_anxious",
+    normal: "cat_normal",
+    happy: "cat_happy",
+  };
+  
+   // 🌙 comfort video for sad/anxious
+  if (emotion === "sad" || emotion === "anxious") {
+    const videos = [
+      "/comfort/headpat.mp4",
+      "/comfort/bellyrub.mp4",
+    ];
+
+    const randomVideo =
+      videos[Math.floor(Math.random() * videos.length)];
+
+    setComfortVideo(randomVideo);
+  } else {
+    setComfortVideo("");
+  }
 
     setAnimation(animationMap[emotion]);
 
@@ -382,14 +398,29 @@ export default function Home() {
             textAlign: "center",
           }}
         >
-          <img
-            src={`/cat/${animation}.png`}
-            width={220}
-            style={{
-              animation:
-                "breath 4s ease-in-out infinite",
-            }}
-          />
+         {comfortVideo ? (
+  <video
+    autoPlay
+    muted
+    playsInline
+    loop
+    style={{
+      width: 320,
+      borderRadius: 24,
+    }}
+  >
+    <source src={comfortVideo} type="video/mp4" />
+  </video>
+) : (
+  <img
+    src={`/cat/${animation}.png`}
+    width={220}
+    style={{
+      animation:
+        "breath 4s ease-in-out infinite",
+    }}
+  />
+)}
 
           <p
             style={{
