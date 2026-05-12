@@ -174,29 +174,22 @@ export default function Home() {
   }, [phase]);
 
   const sendMessage = () => {
-    if (!input.trim()) return;
+  if (!input.trim()) return;
 
-    stopPurr();
+  stopPurr();
 
-    setAnimation("cat_head_bunt_1");
+  const meow = new Audio("/meow.wav");
 
-    setTimeout(() => setAnimation("cat_head_bunt_2"), 180);
+  meow.volume = 0.4;
 
-    setTimeout(() => setAnimation("cat_head_bunt_3"), 360);
+  meow.play().catch(() => {});
 
-    setTimeout(() => setAnimation("cat_idle"), 700);
+  setInput("");
 
-    const meow = new Audio("/meow.wav");
-
-    meow.volume = 0.4;
-
-    meow.play().catch(() => {});
-
-    setInput("");
-
-    runTimeout(() => setPhase("emotion"), 1200);
-  };
-
+  runTimeout(() => {
+    setPhase("emotion");
+  }, 700);
+};
   const selectEmotion = (emotion: string) => {
     const animationMap: Record<string, string> = {
       tired: "cat_tired",
