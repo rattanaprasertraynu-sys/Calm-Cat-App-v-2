@@ -101,7 +101,7 @@ export default function Home() {
   const fadeRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
-    runTimeout(() => setPhase("greeting"), 1800);
+    runTimeout(() => setPhase("greeting"), 6000);
   }, []);
 
   useEffect(() => {
@@ -460,10 +460,20 @@ const animationMap: Record<string, string> = {
       {/* 🌙 FAREWELL */}
       {phase === "farewell" && (
         <div style={{ animation: "fadeIn 1.5s ease" }}>
-          <img
-            src="/logo/calmcat_logo.png"
-            width={220}
-          />
+         <video
+  autoPlay
+  muted
+  playsInline
+  style={{
+    width: 220,
+    borderRadius: 24,
+  }}
+>
+  <source
+    src="/logo/calmcat_logo.mp4"
+    type="video/mp4"
+  />
+</video>
 
           <p>{t.goodbye}</p>
         </div>
