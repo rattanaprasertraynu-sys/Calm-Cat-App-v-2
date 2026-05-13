@@ -86,6 +86,7 @@ export default function Home() {
   const [animation, setAnimation] = useState("cat_idle");
   const [healingText, setHealingText] = useState("");
   const [comfortVideo, setComfortVideo] = useState("");
+  const [rewardVideo, setRewardVideo] = useState("");
   const [lang, setLang] = useState<"th" | "en">("th");
 
   const t = text[lang];
@@ -105,10 +106,12 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    return () => {
-      if (timeoutRef.current) clearTimeout(timeoutRef.current);
-    };
-  }, [phase]);
+  return () => {
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+
+    if (fadeRef.current) clearInterval(fadeRef.current);
+  };
+}, [phase]);
 
   useEffect(() => {
     const audio = new Audio("/purr.wav");
@@ -214,23 +217,44 @@ const animationMap: Record<string, string> = {
   } else {
     setComfortVideo("");
   }
+// 🎁 reward system
+const rewards = [
+  "/rewards/charm_protect.mp4",
+  "/rewards/coin_happiness.mp4",
+  "/rewards/orb_calm.mp4",
+  "/rewards/pouch_lucky.mp4",
+  "/rewards/staff_power.mp4",
+];
 
-    setAnimation(animationMap[emotion]);
+const shouldGetReward = Math.random() < 0.3;
 
-    setHealingText(
-      t.healing[emotion as keyof typeof t.healing]
-    );
+if (shouldGetReward) {
+  const randomReward =
+    rewards[Math.floor(Math.random() * rewards.length)];
 
+  setRewardVideo(randomReward);
+} else {
+  setRewardVideo("");
+}
+
+setAnimation(animationMap[emotion]);
+
+setHealingText(
+  t.healing[emotion as keyof typeof t.healing]
+);
+    
     setTimeout(() => {
       setPhase("healing");
     }, 2200);
   };
 
-  const endSession = () => {
-    setAnimation("cat_idle");
+const endSession = () => {
+  setAnimation("cat_idle");
+  setRewardVideo("");
+  setComfortVideo("");
 
-    setPhase("farewell");
-
+  setPhase("farewell");
+  
     runTimeout(() => {
       setPhase("splash");
 
@@ -268,17 +292,18 @@ const animationMap: Record<string, string> = {
       </div>
 
       {/* 🌟 SPLASH */}
-      {phase === "splash" && (
-        <div style={{ animation: "fadeIn 1.5s ease" }}>
-         <video
-  autoPlay
-  muted
-  playsInline
-  style={{
-    width: 260,
-    borderRadius: 24,
-  }}
->
+{phase === "splash" && (
+  <div style={{ animation: "fadeIn 1.5s ease" }}>
+    <video
+      autoPlay
+      muted
+      playsInline
+      preload="auto"
+      style={{
+        width: 260,
+        borderRadius: 24,
+      }}
+    >
   <source
     src={`/intro/${
       ["butterfly.mp4", "yarn.mp4", "flower.mp4", "dancing.mp4"][
@@ -447,7 +472,21 @@ const animationMap: Record<string, string> = {
           >
             {healingText}
           </p>
-
+{rewardVideo && (
+  <video
+    autoPlay
+    muted
+    playsInline
+    loop
+    style={{
+      width: 180,
+      marginTop: 20,
+      borderRadius: 20,
+    }}
+  >
+    <source src={rewardVideo} type="video/mp4" />
+  </video>
+)}
           <button
             onClick={endSession}
             style={buttonStyle}
@@ -464,6 +503,8 @@ const animationMap: Record<string, string> = {
   autoPlay
   muted
   playsInline
+  loop
+  preload="auto"
   style={{
     width: 220,
     borderRadius: 24,
