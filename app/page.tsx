@@ -8,6 +8,7 @@ type Phase =
   | "chat"
   | "emotion"
   | "healing"
+  | "reward"
   | "farewell";
 
 const text = {
@@ -87,6 +88,7 @@ export default function Home() {
   const [healingText, setHealingText] = useState("");
   const [comfortVideo, setComfortVideo] = useState("");
   const [rewardVideo, setRewardVideo] = useState("");
+  const [rewardText, setRewardText] = useState("");
   const [lang, setLang] = useState<"th" | "en">("th");
 
   const t = text[lang];
@@ -226,18 +228,31 @@ const rewards = [
   "/rewards/staff_power.mp4",
 ];
 
+const rewardTexts = [
+  "ยันต์กันคนใจร้าย ✨ พกไว้... ไม่มีใครกล้าทำนุด",
+  "เหรียญใจฟู 🍊 วันนี้นุดเก่งมากเลยนะ",
+  "ลูกแก้วสงบใจ 🌙 คืนนี้ขอให้นอนสบาย",
+  "ถุงโชคดี 🐾 จ้มแอบใส่ luck ให้แล้ว",
+  "ไม้เท้าพลังใจ 🤍 เอาไว้สู้วันพรุ่งนี้นะ",
+];
 const shouldGetReward = Math.random() < 0.3;
 
 if (shouldGetReward) {
-  const randomReward =
-    rewards[Math.floor(Math.random() * rewards.length)];
+  const randomIndex =
+  Math.floor(Math.random() * rewards.length);
 
-  setRewardVideo(randomReward);
+setRewardVideo(rewards[randomIndex]);
+setRewardText(rewardTexts[randomIndex]);
 } else {
   setRewardVideo("");
+  setRewardText("");
 }
 
-setAnimation(animationMap[emotion]);
+setAnimation(
+  animationMap[
+    emotion as keyof typeof animationMap
+  ]
+);
 
 setHealingText(
   t.healing[emotion as keyof typeof t.healing]
@@ -250,20 +265,25 @@ setHealingText(
 
 const endSession = () => {
   setAnimation("cat_idle");
-  setRewardVideo("");
   setComfortVideo("");
 
+  if (rewardVideo) {
+    setPhase("reward");
+    return;
+  }
+
   setPhase("farewell");
-  
+
+  runTimeout(() => {
+    setPhase("splash");
+
     runTimeout(() => {
-      setPhase("splash");
-
-      runTimeout(() => {
-        setPhase("greeting");
-      }, 1800);
-    }, 2600);
-  };
-
+      setPhase("greeting");
+    }, 1800);
+  }, 2600);
+};
+  
+   
   return (
     <main style={containerStyle}>
       {/* 🌐 LANGUAGE */}
@@ -472,22 +492,7 @@ const endSession = () => {
           >
             {healingText}
           </p>
-{rewardVideo && (
-  <video
-    autoPlay
-    muted
-    playsInline
-    loop
-    style={{
-      width: 180,
-      marginTop: 20,
-      borderRadius: 20,
-    }}
-  >
-    <source src={rewardVideo} type="video/mp4" />
-  </video>
-)}
-          <button
+           <button
             onClick={endSession}
             style={buttonStyle}
           >
@@ -495,7 +500,83 @@ const endSession = () => {
           </button>
         </div>
       )}
+{/* 🎁 REWARD */}
+{phase === "reward" && (
+  <div
+    style={{
+      animation: "fadeInSoft 1s ease",
+      textAlign: "center",
+      maxWidth: 340,
+    }}
+  >
+    <p
+      style={{
+        fontSize: 24,
+        marginBottom: 18,
+      }}
+    >
+      🎁 จ้มมีของขวัญให้นุดนะ
+    </p>
 
+    <div
+  style={{
+    marginTop: 28,
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    gap: 12,
+    animation: "fadeInSoft 1s ease",
+  }}
+>
+  <video
+    autoPlay
+    muted
+    playsInline
+    loop
+    style={{
+      width: 260,
+      maxWidth: "80vw",
+      borderRadius: 28,
+    }}
+  >
+    <source src={rewardVideo} type="video/mp4" />
+  </video>
+
+  <p
+    style={{
+      fontSize: 18,
+      color: "#7A5C3E",
+      maxWidth: 280,
+      lineHeight: 1.6,
+      textAlign: "center",
+      whiteSpace: "pre-line",
+    }}
+  >
+    {rewardText}
+  </p>
+</div>
+
+      <button
+      onClick={() => {
+        setRewardVideo("");
+        setRewardText("");
+        setPhase("farewell");
+
+        runTimeout(() => {
+          setPhase("splash");
+
+          runTimeout(() => {
+            setPhase("greeting");
+          }, 1800);
+        }, 2600);
+      }}
+      style={buttonStyle}
+    >
+      รับไว้เลย 🐾
+    </button>
+  </div>
+)}
+         
       {/* 🌙 FAREWELL */}
       {phase === "farewell" && (
         <div style={{ animation: "fadeIn 1.5s ease" }}>
