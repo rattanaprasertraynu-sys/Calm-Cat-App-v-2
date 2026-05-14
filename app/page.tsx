@@ -556,6 +556,7 @@ const endSession = () => {
   maxWidth: "95vw",
   borderRadius: 32,
 }}
+>
     <source src={rewardVideo} type="video/mp4" />
   </video>
 
