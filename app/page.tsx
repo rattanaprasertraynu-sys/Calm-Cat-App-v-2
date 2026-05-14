@@ -231,18 +231,18 @@ const rewards = [
 const rewardTexts =
   lang === "th"
     ? [
-  "ยันต์กันคนใจร้าย ✨ พกไว้... ไม่มีใครกล้าทำนุด",
-  "เหรียญใจฟู 🍊 วันนี้นุดเก่งมากเลยนะ",
-  "ลูกแก้วสงบใจ 🌙 คืนนี้ขอให้นอนสบาย",
-  "ถุงโชคดี 🐾 จ้มแอบใส่ luck ให้แล้ว",
-  "ไม้เท้าพลังใจ 🤍 เอาไว้สู้วันพรุ่งนี้นะ",
-];
-   : [
+        "ยันต์กันคนใจร้าย ✨ พกไว้... ไม่มีใครกล้าทำนุด",
+        "เหรียญใจฟู 🍊 วันนี้นุดเก่งมากเลยนะ",
+        "ลูกแก้วสงบใจ 🌙 คืนนี้ขอให้นอนสบาย",
+        "ถุงโชคดี 🐾 จ้มแอบใส่ luck ให้แล้ว",
+        "ไม้เท้าพลังใจ 🤍 เอาไว้สู้วันพรุ่งนี้นะ",
+      ]
+    : [
         "Protection charm ✨ No bad vibes allowed.",
         "Happy coin 🍊 Jom's proud of you today.",
-        "Calm orb 🌙 Hope you sleep peacefully tonight.",
+        "Calm orb 🌙 Sleep peacefully tonight.",
         "Lucky pouch 🐾 Jom added extra luck for you.",
-        "Heart staff 🤍 For tomorrow's battles.",
+        "Magic staff 🤍 You can do tomorrow too.",
       ];
 const shouldGetReward = Math.random() < 0.3;
 
