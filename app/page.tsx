@@ -548,14 +548,14 @@ const endSession = () => {
 >
   <video
     autoPlay
+    muted
     playsInline
     loop
     style={{
-      width: 260,
-      maxWidth: "80vw",
-      borderRadius: 28,
-    }}
-  >
+  width: 380,
+  maxWidth: "95vw",
+  borderRadius: 32,
+}}
     <source src={rewardVideo} type="video/mp4" />
   </video>
 
