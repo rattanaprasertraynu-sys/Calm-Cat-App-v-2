@@ -228,13 +228,22 @@ const rewards = [
   "/rewards/staff_power.mp4",
 ];
 
-const rewardTexts = [
+const rewardTexts =
+  lang === "th"
+    ? [
   "ยันต์กันคนใจร้าย ✨ พกไว้... ไม่มีใครกล้าทำนุด",
   "เหรียญใจฟู 🍊 วันนี้นุดเก่งมากเลยนะ",
   "ลูกแก้วสงบใจ 🌙 คืนนี้ขอให้นอนสบาย",
   "ถุงโชคดี 🐾 จ้มแอบใส่ luck ให้แล้ว",
   "ไม้เท้าพลังใจ 🤍 เอาไว้สู้วันพรุ่งนี้นะ",
 ];
+   : [
+        "Protection charm ✨ No bad vibes allowed.",
+        "Happy coin 🍊 Jom's proud of you today.",
+        "Calm orb 🌙 Hope you sleep peacefully tonight.",
+        "Lucky pouch 🐾 Jom added extra luck for you.",
+        "Heart staff 🤍 For tomorrow's battles.",
+      ];
 const shouldGetReward = Math.random() < 0.3;
 
 if (shouldGetReward) {
@@ -530,7 +539,6 @@ const endSession = () => {
 >
   <video
     autoPlay
-    muted
     playsInline
     loop
     style={{
