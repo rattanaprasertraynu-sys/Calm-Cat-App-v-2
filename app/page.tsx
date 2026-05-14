@@ -102,6 +102,8 @@ export default function Home() {
 
   const purrRef = useRef<HTMLAudioElement | null>(null);
   const fadeRef = useRef<NodeJS.Timeout | null>(null);
+  const rewardAudioRef =
+  useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
     runTimeout(() => setPhase("greeting"), 6000);
@@ -277,12 +279,14 @@ const endSession = () => {
   setComfortVideo("");
 
   if (rewardVideo) {
- const rewardAudio = new Audio(
+const rewardAudio = new Audio(
   rewardVideo.replace(".mp4", ".mp3")
 );
 
 rewardAudio.volume = 0.45;
 rewardAudio.loop = true;
+
+rewardAudioRef.current = rewardAudio;
 
 rewardAudio.play().catch(() => {});
 
@@ -577,6 +581,11 @@ return;
 
       <button
       onClick={() => {
+        rewardAudioRef.current?.pause();
+
+        if (rewardAudioRef.current) {
+        rewardAudioRef.current.currentTime = 0;
+        }
         setRewardVideo("");
         setRewardText("");
         setPhase("farewell");
