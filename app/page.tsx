@@ -252,6 +252,13 @@ if (shouldGetReward) {
 
 setRewardVideo(rewards[randomIndex]);
 setRewardText(rewardTexts[randomIndex]);
+const rewardAudio = new Audio(
+  rewards[randomIndex].replace(".mp4", ".mp3")
+);
+
+rewardAudio.volume = 0.45;
+
+rewardAudio.play().catch(() => {});
 } else {
   setRewardVideo("");
   setRewardText("");
