@@ -17,7 +17,7 @@ const text = {
     start: "เริ่มเลย",
     askEmotion: "แล้วตอนนี้... ใจนุดเป็นยังไง?",
     send: "ส่งความรู้สึกให้จ้ม",
-    goodbye: "ฝันดีนะนุด 🐾",
+    goodbye: "มีความสุข สบายใจนะนุด 🐾",
     continue: "ไว้เจอกันนะ",
 
     emotions: {
@@ -51,7 +51,7 @@ const text = {
     start: "Let's begin",
     askEmotion: "How's your heart feeling right now?",
     send: "Send your feelings to Jom",
-    goodbye: "Goodnight hooman 🐾",
+    goodbye: "Stay happy, stay peaceful. 🐾",
     continue: "See you again",
 
     emotions: {
@@ -625,7 +625,19 @@ return;
   />
 </video>
 
-          <p>{t.goodbye}</p>
+         <div style={{ textAlign: "center" }}>
+  <p>{t.goodbye}</p>
+
+  <p
+    style={{
+      marginTop: 8,
+      fontSize: 16,
+      opacity: 0.7,
+    }}
+  >
+    {t.continue}
+  </p>
+</div>
         </div>
       )}
 
