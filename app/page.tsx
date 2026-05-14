@@ -277,17 +277,18 @@ const endSession = () => {
   setComfortVideo("");
 
   if (rewardVideo) {
-  const rewardAudio = new Audio(
-    rewardVideo.replace(".mp4", ".mp3")
-  );
+ const rewardAudio = new Audio(
+  rewardVideo.replace(".mp4", ".mp3")
+);
 
-  rewardAudio.volume = 0.45;
+rewardAudio.volume = 0.45;
+rewardAudio.loop = true;
 
-  rewardAudio.play().catch(() => {});
+rewardAudio.play().catch(() => {});
 
-  setPhase("reward");
+setPhase("reward");
 
-  return;
+return;
 }
 
   setPhase("farewell");
