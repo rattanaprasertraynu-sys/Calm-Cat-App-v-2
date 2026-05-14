@@ -252,13 +252,6 @@ if (shouldGetReward) {
 
 setRewardVideo(rewards[randomIndex]);
 setRewardText(rewardTexts[randomIndex]);
-const rewardAudio = new Audio(
-  rewards[randomIndex].replace(".mp4", ".mp3")
-);
-
-rewardAudio.volume = 0.45;
-
-rewardAudio.play().catch(() => {});
 } else {
   setRewardVideo("");
   setRewardText("");
@@ -284,9 +277,18 @@ const endSession = () => {
   setComfortVideo("");
 
   if (rewardVideo) {
-    setPhase("reward");
-    return;
-  }
+  const rewardAudio = new Audio(
+    rewardVideo.replace(".mp4", ".mp3")
+  );
+
+  rewardAudio.volume = 0.45;
+
+  rewardAudio.play().catch(() => {});
+
+  setPhase("reward");
+
+  return;
+}
 
   setPhase("farewell");
 
