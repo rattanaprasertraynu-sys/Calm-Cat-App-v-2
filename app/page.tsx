@@ -159,6 +159,29 @@ export default function Home() {
 
   const timeoutRef =
     useRef<NodeJS.Timeout | null>(null);
+  const meowRef =
+  useRef<HTMLAudioElement | null>(
+    null
+  );
+
+const purrRef =
+  useRef<HTMLAudioElement | null>(
+    null
+  );
+
+const rewardAudioRef =
+  useRef<HTMLAudioElement | null>(
+    null
+  );
+
+const [rewardVideo, setRewardVideo] =
+  useState("");
+
+const [rewardAudio, setRewardAudio] =
+  useState("");
+
+const [rewardMessage, setRewardMessage] =
+  useState("");
 
   const t = text.th;
 
@@ -277,18 +300,62 @@ export default function Home() {
     setPhase("deepTalk2");
   };
 
-  const submitDeepTalk2 = () => {
-    if (!deepInput.trim()) return;
+ const submitDeepTalk2 = () => {
+  if (!deepInput.trim()) return;
 
-    setDeepInput("");
+  setDeepInput("");
 
-    setComfortVideo("");
+  setComfortVideo("");
 
+  const randomReward =
+    rewards[
+      Math.floor(
+        Math.random() *
+          rewards.length
+      )
+    ];
+
+  // 🌙 random reward
+  setRewardVideo(
+    randomReward.video
+  );
+
+  setRewardAudio(
+    randomReward.audio
+  );
+
+  setRewardMessage(
+    randomReward.message
+  );
+
+  setHealingText(
+    randomItem(t.softClosing)
+  );
+
+  setPhase("reward");
+
+  // 🌙 play reward sound
+  setTimeout(() => {
+    if (
+      rewardAudioRef.current
+    ) {
+      rewardAudioRef.current.src =
+        randomReward.audio;
+
+      rewardAudioRef.current.currentTime =
+        0;
+
+      rewardAudioRef.current
+        .play()
+        .catch(() => {});
+    }
+  }, 200);
+};
     setHealingText(
       randomItem(t.softClosing)
     );
 
-    setPhase("healing");
+    setPhase("reward");
   };
 
   const endSession = () => {
@@ -627,6 +694,37 @@ export default function Home() {
           </p>
         </div>
       )}
+
+      <audio
+  ref={meowRef}
+  preload="auto"
+>
+  <source
+    src="/meow.wav"
+    type="audio/wav"
+  />
+</audio>
+
+<audio
+  ref={purrRef}
+  preload="auto"
+>
+  <source
+    src="/purr.wav"
+    type="audio/wav"
+  />
+</audio>
+
+<audio
+  ref={rewardAudioRef}
+  preload="auto"
+>
+  <source
+    src="/rewards/orb_calm.mp3"
+    type="audio/mp3"
+  />
+</audio>
+      
     </main>
   );
 }
