@@ -227,15 +227,30 @@ const [rewardMessage, setRewardMessage] =
     }
   }, [phase]);
 
-  const sendMessage = () => {
-    if (!input.trim()) return;
+ const sendMessage = () => {
+  if (!input.trim()) return;
 
-    setInput("");
+  if (meowRef.current) {
+    meowRef.current.load();
 
-    runTimeout(() => {
-      setPhase("emotion");
-    }, 500);
-  };
+    meowRef.current.currentTime =
+      0;
+
+    meowRef.current.volume = 1;
+
+    meowRef.current
+      .play()
+      .catch((err) =>
+        console.log(err)
+      );
+  }
+
+  setInput("");
+
+  runTimeout(() => {
+    setPhase("emotion");
+  }, 500);
+};
 
   const selectEmotion = (
     emotion: string
