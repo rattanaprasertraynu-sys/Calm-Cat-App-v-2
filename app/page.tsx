@@ -190,7 +190,7 @@ export default function Home() {
 
     const timer = setTimeout(() => {
       setPhase("greeting");
-    }, 5000);
+    }, 7500);
 
     return () =>
       clearTimeout(timer);
@@ -254,7 +254,7 @@ export default function Home() {
 
     setTimeout(() => {
       setPhase("healing");
-    }, 1200);
+    }, 1800);
   };
 
   const startDeepTalk1 = () => {
@@ -639,6 +639,8 @@ const containerStyle: React.CSSProperties =
     alignItems: "center",
     flexDirection: "column",
     padding: 20,
+
+    transition: "all 0.8s ease",
   };
 
 const buttonStyle: React.CSSProperties =
@@ -739,3 +741,41 @@ const deepTalkContainer: React.CSSProperties =
     animation: "fadeInSoft 1s ease",
     textAlign: "center",
   };
+
+<style jsx global>{`
+  @keyframes fadeInSoft {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes breath {
+    0% {
+      transform: scale(1);
+    }
+
+    50% {
+      transform: scale(1.03);
+    }
+
+    100% {
+      transform: scale(1);
+    }
+  }
+`}</style>
