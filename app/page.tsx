@@ -425,6 +425,14 @@ const [rewardMessage, setRewardMessage] =
 };
   
   const endSession = () => {
+
+  if (rewardAudioRef.current) {
+    rewardAudioRef.current.pause();
+
+    rewardAudioRef.current.currentTime =
+      0;
+  }
+
   // 🌙 reset states
   setComfortVideo("");
 
@@ -433,7 +441,13 @@ const [rewardMessage, setRewardMessage] =
   setPhase("farewell");
 
   runTimeout(() => {
+
     setPhase("splash");
+
+    runTimeout(() => {
+      setPhase("greeting");
+    }, 1800);
+
   }, 2600);
 };
 
