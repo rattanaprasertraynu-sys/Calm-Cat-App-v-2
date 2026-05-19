@@ -351,13 +351,7 @@ const [rewardMessage, setRewardMessage] =
     }
   }, 200);
 };
-    setHealingText(
-      randomItem(t.softClosing)
-    );
-
-    setPhase("reward");
-  };
-
+  
   const endSession = () => {
   // 🌙 reset states
   setComfortVideo("");
@@ -656,6 +650,44 @@ const [rewardMessage, setRewardMessage] =
         </div>
       )}
 
+      {/* REWARD */}
+{phase === "reward" && (
+  <div
+    style={{
+      animation:
+        "fadeInSoft 1s ease",
+      textAlign: "center",
+    }}
+  >
+    <video
+      autoPlay
+      muted
+      loop
+      playsInline
+      style={{
+        width: 260,
+        borderRadius: 24,
+      }}
+    >
+      <source
+        src={rewardVideo}
+        type="video/mp4"
+      />
+    </video>
+
+    <p style={healingStyle}>
+      {rewardMessage}
+    </p>
+
+    <button
+      onClick={endSession}
+      style={buttonStyle}
+    >
+      🌙 พักใจพอแล้ว
+    </button>
+  </div>
+)}
+
       {/* FAREWELL */}
       {phase === "farewell" && (
         <div
@@ -720,7 +752,7 @@ const [rewardMessage, setRewardMessage] =
   preload="auto"
 >
   <source
-    src="/rewards/orb_calm.mp3"
+    src={rewardAudio}
     type="audio/mp3"
   />
 </audio>
