@@ -178,13 +178,22 @@ export default function Home() {
   // 🌙 splash video random
   useEffect(() => {
   if (phase === "splash") {
-    setSplashVideo(
-      randomItem(splashVideos)
-    );
+    const randomVideo =
+      splashVideos[
+        Math.floor(
+          Math.random() *
+            splashVideos.length
+        )
+      ];
 
-    runTimeout(() => {
+    setSplashVideo(randomVideo);
+
+    const timer = setTimeout(() => {
       setPhase("greeting");
     }, 5000);
+
+    return () =>
+      clearTimeout(timer);
   }
 }, [phase]);
 
@@ -283,51 +292,49 @@ export default function Home() {
   };
 
   const endSession = () => {
-    // 🌙 reset states
-    setComfortVideo("");
+  // 🌙 reset states
+  setComfortVideo("");
 
-    setAnimation("cat_idle");
+  setAnimation("cat_idle");
 
-    setPhase("farewell");
+  setPhase("farewell");
 
-    runTimeout(() => {
-      // 🌙 random splash again
-      
-      setPhase("splash");
-
-      runTimeout(() => {
-        setPhase("greeting");
-      }, 1800);
-    }, 2600);
-  };
+  runTimeout(() => {
+    setPhase("splash");
+  }, 2600);
+};
 
   return (
     <main style={containerStyle}>
       {/* SPLASH */}
-{phase === "splash" && (
-  <div
-    style={{
-      animation: "fadeIn 1.5s ease",
-    }}
-  >
-    <video
-      autoPlay
-      muted
-      playsInline
-      preload="auto"
+{phase === "splash" &&
+  splashVideo && (
+    <div
       style={{
-        width: 280,
-        borderRadius: 28,
-        objectFit: "cover",
+        animation:
+          "fadeIn 1.5s ease",
       }}
     >
-      <source
-        src={splashVideo}
-        type="video/mp4"
-      />
-    </video>
-  </div>
-)}
+      <video
+        key={splashVideo}
+        autoPlay
+        muted
+        playsInline
+        loop
+        preload="auto"
+        style={{
+          width: 280,
+          borderRadius: 28,
+          objectFit: "cover",
+        }}
+      >
+        <source
+          src={splashVideo}
+          type="video/mp4"
+        />
+      </video>
+    </div>
+  )}
 
       {/* GREETING */}
       {phase === "greeting" && (
