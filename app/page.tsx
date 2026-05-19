@@ -17,12 +17,25 @@ type Phase =
 const randomItem = (arr: string[]) =>
   arr[Math.floor(Math.random() * arr.length)];
 
+const splashVideos = [
+  "/intro/butterfly.mp4",
+  "/intro/yarn.mp4",
+  "/intro/flower.mp4",
+  "/intro/dancing.mp4",
+];
+
+const comfortVideos = [
+  "/comfort/headpat.mp4",
+  "/comfort/bellyrub.mp4",
+];
+
 const text = {
   th: {
-    greeting: "หวัดดีนุด... เล่ามาเลย จ้มรอฟังอยู่",
+    greeting:
+      "หวัดดีนุด... เล่ามาเลย จ้มรอฟังอยู่ 🐾",
 
     intro:
-      "Calm Cat คือพื้นที่เล็กๆ สำหรับพักใจ\nระบายความรู้สึก\nและให้จ้มอยู่ข้างๆ ในวันที่เหนื่อย 🐾",
+      "Calm Cat คือพื้นที่เล็กๆ สำหรับพักใจ\nระบายความรู้สึก\nและให้จ้มอยู่ข้างๆ ในวันที่เหนื่อย",
 
     privacy:
       "Calm Cat ไม่เก็บข้อความที่นุดพิมพ์นะ 🐾",
@@ -34,7 +47,8 @@ const text = {
 
     send: "ส่งความรู้สึกให้จ้ม",
 
-    goodbye: "มีความสุข สบายใจนะนุด 🐾",
+    goodbye:
+      "มีความสุข สบายใจนะนุด 🐾",
 
     continue: "ไว้เจอกันนะ",
 
@@ -116,114 +130,14 @@ const text = {
       "จ้มอยู่ตรงนี้นะ\nนุดไม่ต้องเข้มแข็งตลอดเวลาก็ได้ 🐾",
     ],
   },
-
-  en: {
-    greeting:
-      "Hi hooman... tell me everything. Jom's listening.",
-
-    intro:
-      "Calm Cat is a gentle little space\nfor resting your heart\nand letting Jom stay beside you 🐾",
-
-    privacy:
-      "Calm Cat does not store your messages 🐾",
-
-    start: "Let's begin",
-
-    askEmotion:
-      "How's your heart feeling right now?",
-
-    send: "Send your feelings to Jom",
-
-    goodbye:
-      "Stay happy, stay peaceful 🐾",
-
-    continue: "See you again",
-
-    continueTalk: "🤍 Keep talking",
-
-    restEnough: "🌙 Rest for now",
-
-    emotions: {
-      tired: "Tired",
-      sad: "Sad",
-      anxious: "Restless",
-      normal: "Okay",
-      happy: "Happy",
-    },
-
-    healing: {
-      tired: [
-        "You've done well today 🐾",
-
-        "You don't have to stay strong all the time 🤍",
-
-        "Come rest with Jom for a while 🌙",
-      ],
-
-      sad: [
-        "Jom's right here with you 🌙",
-
-        "You don't have to carry this alone 🤍",
-
-        "Even heavy hearts deserve rest 🐾",
-      ],
-
-      anxious: [
-        "Take a slow breath 🤍",
-
-        "Jom won't leave you alone 🌙",
-
-        "You don't have to solve everything tonight 🐾",
-      ],
-
-      normal: [
-        "Quiet days are lovely too ✨",
-
-        "Jom's happy you're here 🍊",
-
-        "Some days simply existing is enough 🐾",
-      ],
-
-      happy: [
-        "Yay! Jom feels happy too 🍊",
-
-        "Hope this warm feeling stays ✨",
-
-        "Jom's heart feels fluffy too 🐾",
-      ],
-    },
-
-    deepQuestions1: [
-      "What happened, hooman?\nWhat made your heart feel this heavy?",
-
-      "Is something still stuck in your heart?",
-
-      "Can Jom listen a little more? 🐾",
-    ],
-
-    deepQuestions2: [
-      "If the world could be kinder...\nwhat would you wish for?",
-
-      "Deep down...\nwhat do you wish could change?",
-
-      "If you had one wish about this...\nwhat would it be?",
-    ],
-
-    softClosing: [
-      "Jom understands 🤍\nCarrying this must have been exhausting.",
-
-      "Thank you for sharing this with Jom 🌙",
-
-      "You don't have to stay strong all the time 🐾",
-    ],
-  },
 };
 
 export default function Home() {
   const [phase, setPhase] =
     useState<Phase>("splash");
 
-  const [input, setInput] = useState("");
+  const [input, setInput] =
+    useState("");
 
   const [deepInput, setDeepInput] =
     useState("");
@@ -240,19 +154,13 @@ export default function Home() {
   const [comfortVideo, setComfortVideo] =
     useState("");
 
-  const [rewardVideo, setRewardVideo] =
+  const [splashVideo, setSplashVideo] =
     useState("");
-
-  const [rewardText, setRewardText] =
-    useState("");
-
-  const [lang, setLang] =
-    useState<"th" | "en">("th");
-
-  const t = text[lang];
 
   const timeoutRef =
     useRef<NodeJS.Timeout | null>(null);
+
+  const t = text.th;
 
   const runTimeout = (
     fn: () => void,
@@ -261,14 +169,29 @@ export default function Home() {
     if (timeoutRef.current)
       clearTimeout(timeoutRef.current);
 
-    timeoutRef.current = setTimeout(fn, delay);
+    timeoutRef.current = setTimeout(
+      fn,
+      delay
+    );
   };
 
+  // 🌙 splash video random
   useEffect(() => {
+    setSplashVideo(
+      randomItem(splashVideos)
+    );
+
     runTimeout(() => {
       setPhase("greeting");
     }, 5000);
   }, []);
+
+  // 🌙 reset cat to idle
+  useEffect(() => {
+    if (phase === "emotion") {
+      setAnimation("cat_idle");
+    }
+  }, [phase]);
 
   const sendMessage = () => {
     if (!input.trim()) return;
@@ -293,6 +216,18 @@ export default function Home() {
       normal: "cat_normal",
       happy: "cat_happy",
     };
+
+    // 🌙 comfort videos
+    if (
+      emotion === "sad" ||
+      emotion === "anxious"
+    ) {
+      setComfortVideo(
+        randomItem(comfortVideos)
+      );
+    } else {
+      setComfortVideo("");
+    }
 
     setAnimation(
       animationMap[emotion]
@@ -336,6 +271,8 @@ export default function Home() {
 
     setDeepInput("");
 
+    setComfortVideo("");
+
     setHealingText(
       randomItem(t.softClosing)
     );
@@ -344,9 +281,19 @@ export default function Home() {
   };
 
   const endSession = () => {
+    // 🌙 reset states
+    setComfortVideo("");
+
+    setAnimation("cat_idle");
+
     setPhase("farewell");
 
     runTimeout(() => {
+      // 🌙 random splash again
+      setSplashVideo(
+        randomItem(splashVideos)
+      );
+
       setPhase("splash");
 
       runTimeout(() => {
@@ -357,59 +304,57 @@ export default function Home() {
 
   return (
     <main style={containerStyle}>
-      {/* LANGUAGE */}
-      <div
-        style={{
-          position: "absolute",
-          top: 20,
-          right: 20,
-          display: "flex",
-          gap: 8,
-        }}
-      >
-        <button
-          onClick={() => setLang("th")}
-          style={
-            lang === "th"
-              ? activeLang
-              : langButton
-          }
-        >
-          TH
-        </button>
-
-        <button
-          onClick={() => setLang("en")}
-          style={
-            lang === "en"
-              ? activeLang
-              : langButton
-          }
-        >
-          EN
-        </button>
-      </div>
-
       {/* SPLASH */}
       {phase === "splash" && (
-        <img
-          src="/cat/cat_idle.png"
-          width={220}
-        />
+        <div
+          style={{
+            animation:
+              "fadeIn 1.5s ease",
+          }}
+        >
+          <video
+            autoPlay
+            muted
+            playsInline
+            preload="auto"
+            style={{
+              width: 260,
+              borderRadius: 24,
+            }}
+          >
+            <source
+              src={splashVideo}
+              type="video/mp4"
+            />
+          </video>
+        </div>
       )}
 
       {/* GREETING */}
       {phase === "greeting" && (
         <div
           style={{
-            animation: "fadeIn 1s ease",
+            animation:
+              "fadeIn 1s ease",
             textAlign: "center",
           }}
         >
-          <img
-            src="/cat/cat_idle.png"
-            width={220}
-          />
+          <video
+            autoPlay
+            muted
+            playsInline
+            loop
+            preload="auto"
+            style={{
+              width: 220,
+              borderRadius: 24,
+            }}
+          >
+            <source
+              src="/logo/calmcat_logo.mp4"
+              type="video/mp4"
+            />
+          </video>
 
           <p>{t.greeting}</p>
 
@@ -440,6 +385,10 @@ export default function Home() {
           <img
             src={`/cat/${animation}.png`}
             width={220}
+            style={{
+              animation:
+                "breath 4s ease-in-out infinite",
+            }}
           />
 
           <input
@@ -477,8 +426,12 @@ export default function Home() {
           }}
         >
           <img
-            src={`/cat/${animation}.png`}
+            src="/cat/cat_idle.png"
             width={220}
+            style={{
+              animation:
+                "breath 4s ease-in-out infinite",
+            }}
           />
 
           <p style={questionStyle}>
@@ -512,10 +465,32 @@ export default function Home() {
             textAlign: "center",
           }}
         >
-          <img
-            src={`/cat/${animation}.png`}
-            width={220}
-          />
+          {comfortVideo ? (
+            <video
+              autoPlay
+              muted
+              loop
+              playsInline
+              style={{
+                width: 320,
+                borderRadius: 24,
+              }}
+            >
+              <source
+                src={comfortVideo}
+                type="video/mp4"
+              />
+            </video>
+          ) : (
+            <img
+              src={`/cat/${animation}.png`}
+              width={220}
+              style={{
+                animation:
+                  "breath 4s ease-in-out infinite",
+              }}
+            />
+          )}
 
           <p style={healingStyle}>
             {healingText}
@@ -617,10 +592,22 @@ export default function Home() {
             textAlign: "center",
           }}
         >
-          <img
-            src="/cat/cat_idle.png"
-            width={220}
-          />
+          <video
+            autoPlay
+            muted
+            playsInline
+            loop
+            preload="auto"
+            style={{
+              width: 220,
+              borderRadius: 24,
+            }}
+          >
+            <source
+              src="/logo/calmcat_logo.mp4"
+              type="video/mp4"
+            />
+          </video>
 
           <p>{t.goodbye}</p>
 
@@ -745,22 +732,4 @@ const deepTalkContainer: React.CSSProperties =
   {
     animation: "fadeInSoft 1s ease",
     textAlign: "center",
-  };
-
-const langButton: React.CSSProperties =
-  {
-    border: "none",
-    borderRadius: 12,
-    padding: "8px 12px",
-    background: "#f3f3f3",
-    cursor: "pointer",
-  };
-
-const activeLang: React.CSSProperties =
-  {
-    border: "none",
-    borderRadius: 12,
-    padding: "8px 12px",
-    background: "#FFD8A8",
-    cursor: "pointer",
   };
