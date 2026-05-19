@@ -821,13 +821,10 @@ const [rewardMessage, setRewardMessage] =
 
 <audio
   ref={rewardAudioRef}
+  src={rewardAudio}
   preload="auto"
->
-  <source
-    src={rewardAudio}
-    type="audio/mp3"
-  />
-</audio>
+  loop
+/>
       
     </main>
   );
