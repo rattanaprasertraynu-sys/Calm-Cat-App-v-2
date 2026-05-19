@@ -177,6 +177,7 @@ export default function Home() {
 
   // 🌙 splash video random
   useEffect(() => {
+  if (phase === "splash") {
     setSplashVideo(
       randomItem(splashVideos)
     );
@@ -184,7 +185,8 @@ export default function Home() {
     runTimeout(() => {
       setPhase("greeting");
     }, 5000);
-  }, []);
+  }
+}, [phase]);
 
   // 🌙 reset cat to idle
   useEffect(() => {
@@ -290,10 +292,7 @@ export default function Home() {
 
     runTimeout(() => {
       // 🌙 random splash again
-      setSplashVideo(
-        randomItem(splashVideos)
-      );
-
+      
       setPhase("splash");
 
       runTimeout(() => {
