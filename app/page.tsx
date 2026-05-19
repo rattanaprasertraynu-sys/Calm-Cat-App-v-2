@@ -305,30 +305,30 @@ export default function Home() {
   return (
     <main style={containerStyle}>
       {/* SPLASH */}
-      {phase === "splash" && (
-        <div
-          style={{
-            animation:
-              "fadeIn 1.5s ease",
-          }}
-        >
-          <video
-            autoPlay
-            muted
-            playsInline
-            preload="auto"
-            style={{
-              width: 260,
-              borderRadius: 24,
-            }}
-          >
-            <source
-              src={splashVideo}
-              type="video/mp4"
-            />
-          </video>
-        </div>
-      )}
+{phase === "splash" && (
+  <div
+    style={{
+      animation: "fadeIn 1.5s ease",
+    }}
+  >
+    <video
+      autoPlay
+      muted
+      playsInline
+      preload="auto"
+      style={{
+        width: 280,
+        borderRadius: 28,
+        objectFit: "cover",
+      }}
+    >
+      <source
+        src={splashVideo}
+        type="video/mp4"
+      />
+    </video>
+  </div>
+)}
 
       {/* GREETING */}
       {phase === "greeting" && (
