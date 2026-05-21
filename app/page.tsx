@@ -767,6 +767,75 @@ runTimeout(() => {
         </div>
       )}
 
+     {/* CONTINUE CHOICE */}
+{phase === "continueChoice" && (
+  <div
+    style={{
+      animation:
+        "fadeInSoft 1s ease",
+      textAlign: "center",
+    }}
+  >
+    <img
+      src={`/cat/${animation}.png`}
+      width={220}
+      style={{
+        animation:
+          "breath 4s ease-in-out infinite",
+      }}
+    />
+
+    <p style={healingStyle}>
+      🌙 นุดยังอยากเล่าต่อไหม?
+    </p>
+
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        gap: 12,
+        marginTop: 24,
+      }}
+    >
+      <button
+        onClick={() => {
+          setDeepInput("");
+
+          setPhase("deepTalk1");
+        }}
+        style={buttonStyle}
+      >
+        🐾 อยากเล่าต่อ
+      </button>
+
+      <button
+        onClick={() => {
+
+          if (
+            rewardAudioRef.current
+          ) {
+
+            rewardAudioRef.current.src =
+              rewardAudio;
+
+            rewardAudioRef.current.currentTime =
+              0;
+
+            rewardAudioRef.current
+              .play()
+              .catch(() => {});
+          }
+
+          setPhase("reward");
+        }}
+        style={buttonStyle}
+      >
+        🌙 พักใจพอแล้ว
+      </button>
+    </div>
+  </div>
+)}
+
       {/* REWARD */}
 {phase === "reward" && (
   <div
