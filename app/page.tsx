@@ -8,6 +8,7 @@ type Phase =
   | "chat"
   | "emotion"
   | "healing"
+  | "messageSomeone"
   | "continueChoice"
   | "deepTalk1"
   | "deepTalk2"
@@ -414,7 +415,7 @@ runTimeout(() => {
     randomItem(t.softClosing)
   );
 
- setPhase("continueChoice");
+ setPhase("messageSomeone");
 
 };
   
@@ -750,6 +751,105 @@ runTimeout(() => {
           </button>
         </div>
       )}
+
+     
+     {/* CONTINUE CHOICE */}
+{phase === "messageSomeone" && (
+  <div
+    style={{
+      animation:
+        "fadeInSoft 1s ease",
+      textAlign: "center",
+    }}
+  >
+    <img
+      src={`/cat/${animation}.png`}
+      width={220}
+      style={{
+        animation:
+          "breath 4s ease-in-out infinite",
+      }}
+    />
+
+    <p style={healingStyle}>
+      🌙 มีอะไรอยากบอกใครบางคนไหม?
+    </p>
+
+    <p
+  style={{
+    opacity: 0.7,
+    marginTop: 12,
+    marginBottom: 12,
+    fontSize: 14,
+  }}
+>
+  
+</p>
+    
+    <textarea
+  placeholder="🌙 อยากบอกอะไรกับใครบางคนไหม..."
+  value={deepInput}
+  onChange={(e) =>
+    setDeepInput(
+      e.target.value
+    )
+  }
+  style={textareaStyle}
+/>
+    
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        gap: 12,
+        marginTop: 24,
+      }}
+    >
+      <button
+       onClick={() => {
+
+   setDeepTalkText(
+    randomItem(
+      t.deepQuestions1
+    )
+  );
+
+ setPhase("continueChoice");
+}}
+        style={buttonStyle}
+      >
+        🐾 อยากเล่าต่อ
+      </button>
+
+      <button
+        onClick={() => {
+
+          if (
+            rewardAudioRef.current
+          ) {
+
+            rewardAudioRef.current.src =
+              rewardAudio;
+
+            rewardAudioRef.current.currentTime =
+              0;
+
+            rewardAudioRef.current
+              .play()
+              .catch(() => {});
+          }
+
+          setPhase("reward");
+        }}
+        style={buttonStyle}
+      >
+        🌙 พักใจพอแล้ว
+      </button>
+    </div>
+  </div>
+)}
+
+     
 
      {/* CONTINUE CHOICE */}
 {phase === "continueChoice" && (
