@@ -416,22 +416,6 @@ runTimeout(() => {
 
  setPhase("continueChoice");
 
-  // 🌙 play reward sound
-  setTimeout(() => {
-    if (
-      rewardAudioRef.current
-    ) {
-      rewardAudioRef.current.src =
-        randomReward.audio;
-
-      rewardAudioRef.current.currentTime =
-        0;
-
-      rewardAudioRef.current
-        .play()
-        .catch(() => {});
-    }
-  }, 200);
 };
   
   const endSession = () => {
