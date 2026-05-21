@@ -414,7 +414,7 @@ runTimeout(() => {
     randomItem(t.softClosing)
   );
 
-  setPhase("reward");
+ setPhase("continueChoice");
 
   // 🌙 play reward sound
   setTimeout(() => {
