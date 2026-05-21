@@ -471,6 +471,7 @@ runTimeout(() => {
   }, 2600);
 
 }, 600);
+};
     
   return (
    <main
