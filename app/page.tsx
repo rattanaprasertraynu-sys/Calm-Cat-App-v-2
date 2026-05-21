@@ -196,6 +196,9 @@ export default function Home() {
   const [input, setInput] =
     useState("");
 
+  const [fadeOut, setFadeOut] =
+  useState(false);
+
   const [deepInput, setDeepInput] =
     useState("");
 
@@ -269,7 +272,14 @@ const [rewardMessage, setRewardMessage] =
     setSplashVideo(randomVideo);
 
     const timer = setTimeout(() => {
-      setPhase("greeting");
+      setFadeOut(true);
+
+runTimeout(() => {
+  setPhase("greeting");
+
+  setFadeOut(false);
+}, 700);
+      
     }, 7500);
 
     return () =>
@@ -438,21 +448,41 @@ const [rewardMessage, setRewardMessage] =
 
   setAnimation("cat_idle");
 
+ setFadeOut(true);
+
+runTimeout(() => {
+
   setPhase("farewell");
+
+  setFadeOut(false);
 
   runTimeout(() => {
 
-    setPhase("splash");
+    setFadeOut(true);
 
     runTimeout(() => {
-      setPhase("greeting");
-    }, 1800);
+
+      setPhase("splash");
+
+      setFadeOut(false);
+
+    }, 600);
 
   }, 2600);
-};
 
+}, 600);
+    
   return (
-    <main style={containerStyle}>
+   <main
+  style={{
+    ...containerStyle,
+
+    opacity: fadeOut ? 0 : 1,
+
+    transition:
+      "opacity 0.8s ease",
+  }}
+>
       {/* SPLASH */}
 {phase === "splash" &&
   splashVideo && (
