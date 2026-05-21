@@ -782,11 +782,18 @@ runTimeout(() => {
       }}
     >
       <button
-        onClick={() => {
-          setDeepInput("");
+       onClick={() => {
 
-          setPhase("deepTalk1");
-        }}
+  setDeepInput("");
+
+  setDeepTalkText(
+    randomItem(
+      t.deepQuestions1
+    )
+  );
+
+  setPhase("deepTalk1");
+}}
         style={buttonStyle}
       >
         🐾 อยากเล่าต่อ
