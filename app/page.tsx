@@ -380,7 +380,7 @@ runTimeout(() => {
       randomItem(t.deepQuestions2)
     );
 
-    setPhase("deepTalk2");
+    setPhase("continueChoice");
   };
 
  const submitDeepTalk2 = () => {
@@ -415,7 +415,7 @@ runTimeout(() => {
     randomItem(t.softClosing)
   );
 
- setPhase("messageSomeone");
+setPhase("continueChoice");
 
 };
   
