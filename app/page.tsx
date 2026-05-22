@@ -814,7 +814,6 @@ onChange={(e) =>
         </div>
       )}
   
-
      {/* CONTINUE CHOICE */}
 {phase === "continueChoice" && (
   <div
@@ -837,8 +836,7 @@ onChange={(e) =>
       🌙 นุดยังอยากเล่าต่อไหม?
     </p>
 
-  
-    
+   
     <div
       style={{
         display: "flex",
@@ -865,6 +863,25 @@ onChange={(e) =>
 
       <button
         onClick={() => {
+          const randomReward =
+      rewards[
+        Math.floor(
+          Math.random() *
+            rewards.length
+        )
+      ];
+
+    setRewardVideo(
+      randomReward.video
+    );
+
+    setRewardAudio(
+      randomReward.audio
+    );
+
+    setRewardMessage(
+      randomReward.message
+    );
 
           if (
             rewardAudioRef.current
@@ -881,6 +898,7 @@ onChange={(e) =>
               .catch(() => {});
           }
 
+          
           setPhase("reward");
         }}
         style={buttonStyle}
@@ -891,6 +909,8 @@ onChange={(e) =>
   </div>
 )}
 
+     
+     
       {/* REWARD */}
 {phase === "reward" && (
   <div
