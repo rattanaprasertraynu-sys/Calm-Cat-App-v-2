@@ -797,55 +797,25 @@ runTimeout(() => {
   style={textareaStyle}
 />
     
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        gap: 12,
-        marginTop: 24,
-      }}
-    >
-      <button
-       onClick={() => {
+   <div
+  style={{
+    display: "flex",
+    flexDirection: "column",
+    gap: 12,
+    marginTop: 24,
+  }}
+>
+  <button
+    onClick={() => {
 
-   setDeepTalkText(
-    randomItem(
-      t.deepQuestions1
-    )
-  );
+      setPhase("emotion");
 
- setPhase("continueChoice");
-}}
-        style={buttonStyle}
-      >
-        🐾 อยากเล่าต่อ
-      </button>
-
-      <button
-        onClick={() => {
-
-          if (
-            rewardAudioRef.current
-          ) {
-
-            rewardAudioRef.current.src =
-              rewardAudio;
-
-            rewardAudioRef.current.currentTime =
-              0;
-
-            rewardAudioRef.current
-              .play()
-              .catch(() => {});
-          }
-
-          setPhase("reward");
-        }}
-        style={buttonStyle}
-      >
-        🌙 พักใจพอแล้ว
-      </button>
-    </div>
+    }}
+    style={buttonStyle}
+  >
+    🐾 ต่อไป
+  </button>
+</div>
   </div>
 )}
 
