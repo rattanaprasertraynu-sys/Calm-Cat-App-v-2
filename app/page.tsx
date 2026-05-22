@@ -887,9 +887,6 @@ onChange={(e) =>
             rewardAudioRef.current
           ) {
 
-            rewardAudioRef.current.src =
-              rewardAudio;
-
             rewardAudioRef.current.currentTime =
               0;
 
