@@ -634,7 +634,9 @@ onChange={(e) =>
       <button
         onClick={() => {
 
-          setPhase("emotion");
+         setMessageInput("");
+
+         setPhase("emotion");
 
         }}
         style={buttonStyle}
