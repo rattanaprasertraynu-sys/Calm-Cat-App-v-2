@@ -862,8 +862,9 @@ onChange={(e) =>
       </button>
 
       <button
-        onClick={() => {
-          const randomReward =
+  onClick={() => {
+
+    const randomReward =
       rewards[
         Math.floor(
           Math.random() *
@@ -883,25 +884,28 @@ onChange={(e) =>
       randomReward.message
     );
 
-          if (
-            rewardAudioRef.current
-          ) {
+    if (
+      rewardAudioRef.current
+    ) {
 
-            rewardAudioRef.current.currentTime =
-              0;
+      rewardAudioRef.current.src =
+        randomReward.audio;
 
-            rewardAudioRef.current
-              .play()
-              .catch(() => {});
-          }
+      rewardAudioRef.current.currentTime =
+        0;
 
-          
-          setPhase("reward");
-        }}
-        style={buttonStyle}
-      >
-        🌙 พักใจพอแล้ว
-      </button>
+      rewardAudioRef.current
+        .play()
+        .catch(() => {});
+    }
+
+    setPhase("reward");
+
+  }}
+  style={buttonStyle}
+>
+  🌙 พักใจพอแล้ว
+</button>
     </div>
   </div>
 )}
@@ -1007,7 +1011,6 @@ onChange={(e) =>
 
 <audio
   ref={rewardAudioRef}
-  src={rewardAudio}
   preload="auto"
   loop
 />
