@@ -830,29 +830,7 @@ runTimeout(() => {
       🌙 นุดยังอยากเล่าต่อไหม?
     </p>
 
-    <p
-  style={{
-    opacity: 0.7,
-    marginTop: 12,
-    marginBottom: 12,
-    fontSize: 14,
-  }}
->
-  🌙 หรือถ้านุดมีอะไร
-  อยากบอกใครบางคน...
-  ก็พิมพ์ไว้ตรงนี้ได้นะ
-</p>
-    
-    <textarea
-  placeholder="🌙 อยากบอกอะไรกับใครบางคนไหม..."
-  value={deepInput}
-  onChange={(e) =>
-    setDeepInput(
-      e.target.value
-    )
-  }
-  style={textareaStyle}
-/>
+  
     
     <div
       style={{
@@ -864,7 +842,7 @@ runTimeout(() => {
     >
       <button
        onClick={() => {
-
+  setDeepInput("");
    setDeepTalkText(
     randomItem(
       t.deepQuestions1
