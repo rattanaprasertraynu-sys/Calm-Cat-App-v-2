@@ -191,6 +191,10 @@ const text = {
 };
 
 export default function Home() {
+  const [
+  messageInput,
+  setMessageInput
+] = useState("");
   const [phase, setPhase] =
     useState<Phase>("splash");
 
@@ -609,12 +613,13 @@ runTimeout(() => {
 
     <textarea
       placeholder="🌙 อยากบอกอะไรกับใครบางคนไหม..."
-      value={deepInput}
-      onChange={(e) =>
-        setDeepInput(
-          e.target.value
-        )
-      }
+     value={messageInput}
+
+onChange={(e) =>
+  setMessageInput(
+    e.target.value
+  )
+}
       style={textareaStyle}
     />
 
