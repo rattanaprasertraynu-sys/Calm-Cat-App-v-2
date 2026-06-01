@@ -272,36 +272,7 @@ const [rewardMessage, setRewardMessage] =
     );
   };
 
-  const rewardAudioRef =
-  useRef<HTMLAudioElement | null>(
-    null
-  );
-
-const [rewardVideo, setRewardVideo] =
-  useState("");
-
-const [rewardAudio, setRewardAudio] =
-  useState("");
-
-const [rewardMessage, setRewardMessage] =
-  useState("");
-
-  const t = text.th;
-
-  const runTimeout = (
-    fn: () => void,
-    delay: number
-  ) => {
-    if (timeoutRef.current)
-      clearTimeout(timeoutRef.current);
-
-    timeoutRef.current = setTimeout(
-      fn,
-      delay
-    );
-  };
-
-
+ 
   // 🌙 splash video random
   useEffect(() => {
   if (phase === "splash") {
