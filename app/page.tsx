@@ -8,6 +8,7 @@ type Phase =
   | "chat"
   | "emotion"
   | "healing"
+  | "diary"
   | "messageSomeone"
   | "continueChoice"
   | "deepTalk1"
@@ -216,6 +217,14 @@ export default function Home() {
   const [deepTalkText, setDeepTalkText] =
     useState("");
 
+  const [diaryText, setDiaryText] =
+  useState("");
+
+const [listeningText, setListeningText] =
+  useState(
+    "เจ้าส้มกำลังฟังอยู่นะ 🐾"
+  );
+
   const [comfortVideo, setComfortVideo] =
     useState("");
 
@@ -262,6 +271,36 @@ const [rewardMessage, setRewardMessage] =
       delay
     );
   };
+
+  const rewardAudioRef =
+  useRef<HTMLAudioElement | null>(
+    null
+  );
+
+const [rewardVideo, setRewardVideo] =
+  useState("");
+
+const [rewardAudio, setRewardAudio] =
+  useState("");
+
+const [rewardMessage, setRewardMessage] =
+  useState("");
+
+  const t = text.th;
+
+  const runTimeout = (
+    fn: () => void,
+    delay: number
+  ) => {
+    if (timeoutRef.current)
+      clearTimeout(timeoutRef.current);
+
+    timeoutRef.current = setTimeout(
+      fn,
+      delay
+    );
+  };
+
 
   // 🌙 splash video random
   useEffect(() => {
