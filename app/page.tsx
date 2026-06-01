@@ -905,9 +905,14 @@ onChange={(e) =>
         0;
 
       rewardAudioRef.current
-        .play()
-        .catch(() => {});
-    }
+    .play()
+    .catch((err) =>
+      console.log(
+        "Reward audio error:",
+        err
+      )
+    );
+}
 
     setPhase("reward");
 
