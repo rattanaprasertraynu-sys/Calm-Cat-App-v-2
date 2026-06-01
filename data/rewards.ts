@@ -1,6 +1,7 @@
 export const rewards = [
   {
     video: "/rewards/orb_calm.mp4",
+    audio: "/rewards/reward_sound.mp3"
     title: "🌙 Calm Orb",
     message:
       "เจ้าส้มมอบพลังใจแห่งความสงบให้นุด",
@@ -8,6 +9,7 @@ export const rewards = [
 
   {
     video: "/rewards/charm_protect.mp4",
+    audio: "/rewards/reward_sound.mp3"
     title: "🛡️ Protection Charm",
     message:
       "ขอให้นุดปลอดภัยและผ่านทุกเรื่องไปได้",
@@ -15,6 +17,7 @@ export const rewards = [
 
   {
     video: "/rewards/coin_happiness.mp4",
+    audio: "/rewards/reward_sound.mp3"
     title: "✨ Happiness Coin",
     message:
       "ขอให้มีเรื่องดี ๆ เข้ามาในวันพรุ่งนี้",
@@ -22,6 +25,7 @@ export const rewards = [
 
   {
     video: "/rewards/pouch_lucky.mp4",
+    audio: "/rewards/reward_sound.mp3"
     title: "🍀 Lucky Pouch",
     message:
       "เจ้าส้มส่งโชคดีให้นุดนะ",
@@ -29,6 +33,7 @@ export const rewards = [
 
   {
     video: "/rewards/staff_power.mp4",
+    audio: "/rewards/reward_sound.mp3"
     title: "🔥 Power Staff",
     message:
       "ขอให้นุดมีพลังใจสำหรับก้าวต่อไป",
