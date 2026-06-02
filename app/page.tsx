@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { rewards } from "@/data/rewards";
+import { rewards } from "../data/rewards";
 
 type Phase =
   | "splash"
