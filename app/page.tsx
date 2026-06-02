@@ -898,8 +898,15 @@ onChange={(e) =>
       rewardAudioRef.current
     ) {
 
+      console.log(
+  "Reward audio ref:",
+  rewardAudioRef.current
+);
+
       rewardAudioRef.current.src =
         randomReward.audio;
+
+      
 
       rewardAudioRef.current.currentTime =
         0;
