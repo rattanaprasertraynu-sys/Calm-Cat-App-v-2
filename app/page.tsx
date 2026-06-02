@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import { rewards } from "@/data/rewards";
 
 type Phase =
   | "splash"
@@ -29,63 +30,6 @@ const splashVideos = [
 const comfortVideos = [
   "/comfort/headpat.mp4",
   "/comfort/bellyrub.mp4",
-];
-
-const rewards = [
-  {
-    video:
-      "/rewards/orb_calm.mp4",
-
-    audio:
-      "/rewards/orb_calm.mp3",
-
-    message:
-      "🌙 Calm Orb\nจ้มมอบพลังใจสงบให้นุดนะ",
-  },
-
-  {
-    video:
-      "/rewards/charm_protect.mp4",
-
-    audio:
-      "/rewards/charm_protect.mp3",
-
-    message:
-      "🛡️ Protection Charm\nขอให้นุดปลอดภัยจากเรื่องหนักใจ",
-  },
-
-  {
-    video:
-      "/rewards/coin_happiness.mp4",
-
-    audio:
-      "/rewards/coin_happiness.mp3",
-
-    message:
-      "✨ Happiness Coin\nจ้มขอส่งความใจฟูให้นุด",
-  },
-
-  {
-    video:
-      "/rewards/pouch_lucky.mp4",
-
-    audio:
-      "/rewards/pouch_lucky.mp3",
-
-    message:
-      "🍀 Lucky Pouch\nขอให้วันต่อๆ ไปใจดีกับนุด",
-  },
-
-  {
-    video:
-      "/rewards/staff_power.mp4",
-
-    audio:
-      "/rewards/staff_power.mp3",
-
-    message:
-      "🔮 Power Staff\nจ้มขอมอบพลังเล็กๆ ให้นุดนะ",
-  },
 ];
 
 const text = {
