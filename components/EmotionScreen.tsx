@@ -16,7 +16,7 @@ useState<EmotionType>("tired");
 
 return ( <div className="emotion-container">
 
-```
+
   <h1 className="emotion-title">
     Calm Cat Emotion Test
   </h1>
@@ -86,7 +86,7 @@ return ( <div className="emotion-container">
   )}
 
 </div>
-```
+
 
 );
 }
@@ -97,7 +97,6 @@ useState(false);
 
 return ( <div className="emotion-card">
 
-```
   <img
     src="/cat/cat_tired.png"
     className={
@@ -126,7 +125,7 @@ return ( <div className="emotion-card">
   )}
 
 </div>
-```
+
 
 );
 }
@@ -134,7 +133,7 @@ return ( <div className="emotion-card">
 function SadEmotion() {
 return ( <div className="emotion-card">
 
-```
+
   <img
     src="/cat/cat_sad.png"
     className="cat-static"
@@ -145,7 +144,7 @@ return ( <div className="emotion-card">
   </p>
 
 </div>
-```
+
 
 );
 }
@@ -153,7 +152,7 @@ return ( <div className="emotion-card">
 function AnxiousEmotion() {
 return ( <div className="emotion-card">
 
-```
+
   <img
     src="/cat/cat_anxious.png"
     className="cat-static"
@@ -164,7 +163,7 @@ return ( <div className="emotion-card">
   </p>
 
 </div>
-```
+
 
 );
 }
@@ -172,7 +171,7 @@ return ( <div className="emotion-card">
 function NormalEmotion() {
 return ( <div className="emotion-card">
 
-```
+
   <img
     src="/cat/cat_normal.png"
     className="cat-gentle"
@@ -183,7 +182,7 @@ return ( <div className="emotion-card">
   </p>
 
 </div>
-```
+
 
 );
 }
@@ -191,7 +190,7 @@ return ( <div className="emotion-card">
 function HappyEmotion() {
 return ( <div className="emotion-card">
 
-```
+
   <img
     src="/cat/cat_happy.png"
     className="cat-gentle"
@@ -202,7 +201,7 @@ return ( <div className="emotion-card">
   </p>
 
 </div>
-```
+
 
 );
 }
