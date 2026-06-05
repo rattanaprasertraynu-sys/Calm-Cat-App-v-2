@@ -58,3 +58,16 @@
 .floating-heart {
   animation: floatingHeart 2s ease forwards;
 }
+.emotion-container {
+  min-height: 100dvh;
+
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+  align-items: center;
+
+  text-align: center;
+
+  padding: 20px;
+}
