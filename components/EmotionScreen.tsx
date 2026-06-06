@@ -91,7 +91,7 @@ return ( <div className="emotion-container">
         <img
           src="/cat/cat_tired.png"
           width={220}
-          className="cat-breath"
+         className="breathing"
           alt="Tired Cat"
         />
 
