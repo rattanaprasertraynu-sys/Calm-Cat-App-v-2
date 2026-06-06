@@ -88,13 +88,12 @@ return ( <div className="emotion-container">
   <>
     {emotion === "tired" && (
       <>
-        <img
-          src="/cat/cat_tired.png"
-          width={220}
-         className="breathing"
-          alt="Tired Cat"
-        />
-
+       <img
+  src="/cat/cat_tired.png"
+  width={220}
+  className="tired-breathing"
+  alt="Tired Cat"
+/>
         <p
           style={{
             marginTop: 16,
