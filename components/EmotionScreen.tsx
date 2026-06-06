@@ -12,81 +12,137 @@ type EmotionType =
 
 export default function EmotionScreen() {
 const [emotion, setEmotion] =
-useState<EmotionType>("tired");
+  useState<EmotionType | null>(null);
+
+const [step, setStep] =
+  useState<
+    "select" |
+    "diary" |
+    "interaction"
+  >("select");
+
+const [message, setMessage] =
+  useState("");
 
 return ( <div className="emotion-container">
 
 
-  <h1 className="emotion-title">
-    Calm Cat Emotion Test
-  </h1>
+ {step === "select" && (
+  <>
+    <h1 className="emotion-title">
+      วันนี้รู้สึกอย่างไรบ้าง
+    </h1>
 
-  <div className="emotion-selector">
+    <div className="emotion-selector">
+
+      <button
+        onClick={() => {
+          setEmotion("tired");
+          setStep("diary");
+        }}
+      >
+        เหนื่อย
+      </button>
+
+      <button
+        onClick={() => {
+          setEmotion("sad");
+          setStep("diary");
+        }}
+      >
+        เศร้า
+      </button>
+
+      <button
+        onClick={() => {
+          setEmotion("anxious");
+          setStep("diary");
+        }}
+      >
+        ว้าวุ่น
+      </button>
+
+      <button
+        onClick={() => {
+          setEmotion("normal");
+          setStep("diary");
+        }}
+      >
+        ปกติ
+      </button>
+
+      <button
+        onClick={() => {
+          setEmotion("happy");
+          setStep("diary");
+        }}
+      >
+        ใจฟู
+      </button>
+
+    </div>
+  </>
+)}
+
+{step === "diary" && (
+  <>
+    <h2>
+      อยากเล่าอะไรให้จ้มฟังไหม
+    </h2>
+
+    <textarea
+      value={message}
+      onChange={(e) =>
+        setMessage(e.target.value)
+      }
+      placeholder="พิมพ์ได้เต็มที่เลย..."
+      rows={6}
+      style={{
+        width: "100%",
+        maxWidth: 400,
+        padding: 12,
+        borderRadius: 12,
+      }}
+    />
+
+    <br />
 
     <button
       onClick={() =>
-        setEmotion("tired")
+        setStep("interaction")
       }
+      disabled={!message.trim()}
     >
-      เหนื่อย
+      ส่งให้จ้ม
     </button>
+  </>
+)}
 
-    <button
-      onClick={() =>
-        setEmotion("sad")
-      }
-    >
-      เศร้า
-    </button>
+{step === "interaction" && (
+  <>
+    {emotion === "tired" && (
+      <TiredEmotion />
+    )}
 
-    <button
-      onClick={() =>
-        setEmotion("anxious")
-      }
-    >
-      ว้าวุ่น
-    </button>
+    {emotion === "sad" && (
+      <SadEmotion />
+    )}
 
-    <button
-      onClick={() =>
-        setEmotion("normal")
-      }
-    >
-      ปกติ
-    </button>
+    {emotion === "anxious" && (
+      <AnxiousEmotion />
+    )}
 
-    <button
-      onClick={() =>
-        setEmotion("happy")
-      }
-    >
-      ใจฟู
-    </button>
+    {emotion === "normal" && (
+      <NormalEmotion />
+    )}
+
+    {emotion === "happy" && (
+      <HappyEmotion />
+    )}
+  </>
+)}
 
   </div>
-
-  {emotion === "tired" && (
-    <TiredEmotion />
-  )}
-
-  {emotion === "sad" && (
-    <SadEmotion />
-  )}
-
-  {emotion === "anxious" && (
-    <AnxiousEmotion />
-  )}
-
-  {emotion === "normal" && (
-    <NormalEmotion />
-  )}
-
-  {emotion === "happy" && (
-    <HappyEmotion />
-  )}
-
-</div>
-
 
 );
 }
