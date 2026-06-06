@@ -23,6 +23,11 @@ const [step, setStep] =
 
 const [message, setMessage] =
   useState("");
+  const [submitted, setSubmitted] =
+  useState(false);
+
+const [touched, setTouched] =
+  useState(false);
 
 return ( <div className="emotion-container">
 
@@ -94,11 +99,20 @@ return ( <div className="emotion-container">
   <>
     {emotion === "tired" && (
       <>
-       <img
+     <img
   src="/cat/cat_tired.png"
   width={220}
-  className="tired-breathing"
   alt="Tired Cat"
+  className={
+    touched
+      ? ""
+      : "tired-breathing"
+  }
+  onClick={() => {
+    if (submitted) {
+      setTouched(true);
+    }
+  }}
 />
         <p
           style={{
@@ -167,6 +181,8 @@ return ( <div className="emotion-container">
       </>
     )}
 
+    {!submitted && (
+  <>
     <textarea
       value={message}
       onChange={(e) =>
@@ -185,7 +201,7 @@ return ( <div className="emotion-container">
 
     <button
       onClick={() =>
-        setStep("interaction")
+        setSubmitted(true)
       }
       disabled={!message.trim()}
       style={{
@@ -196,30 +212,35 @@ return ( <div className="emotion-container">
     </button>
   </>
 )}
+    {submitted && !touched && (
+  <p
+    style={{
+      marginTop: 20,
+      fontSize: 18,
+    }}
+  >
+    จ้มอ่านแล้วนะ...
+    <br />
+    ลูบหัวจ้มหน่อยได้ไหม 🐾
+  </p>
+)}
 
-{step === "interaction" && (
-  <>
-    {emotion === "tired" && (
-      <TiredEmotion />
-    )}
-
-    {emotion === "sad" && (
-      <SadEmotion />
-    )}
-
-    {emotion === "anxious" && (
-      <AnxiousEmotion />
-    )}
-
-    {emotion === "normal" && (
-      <NormalEmotion />
-    )}
-
-    {emotion === "happy" && (
-      <HappyEmotion />
-    )}
+{submitted && touched && (
+  <p
+    style={{
+      marginTop: 20,
+      fontSize: 18,
+    }}
+  >
+    ขอบคุณนะ...
+    <br />
+    เจ้าเหมียวเริ่มผ่อนคลายแล้ว 💛
+  </p>
+)}
+    
   </>
 )}
+
 
   </div>
 
