@@ -86,32 +86,106 @@ return ( <div className="emotion-container">
 
 {step === "diary" && (
   <>
-    <h2>
-      อยากเล่าอะไรให้จ้มฟังไหม
-    </h2>
+    {emotion === "tired" && (
+      <>
+        <img
+          src="/cat/cat_tired.png"
+          width={220}
+          className="cat-breath"
+          alt="Tired Cat"
+        />
+
+        <p
+          style={{
+            marginTop: 16,
+            marginBottom: 20,
+          }}
+        >
+          เจ้าเหมียวส้มก็เหนื่อยเหมือนกันเลย...
+        </p>
+      </>
+    )}
+
+    {emotion === "sad" && (
+      <>
+        <img
+          src="/cat/cat_sad.png"
+          width={220}
+          alt="Sad Cat"
+        />
+
+        <p>
+          วันนี้มีเรื่องเศร้าเหรอ...
+        </p>
+      </>
+    )}
+
+    {emotion === "anxious" && (
+      <>
+        <img
+          src="/cat/cat_anxious.png"
+          width={220}
+          alt="Anxious Cat"
+        />
+
+        <p>
+          มีเรื่องให้คิดเต็มหัวเลยใช่ไหม...
+        </p>
+      </>
+    )}
+
+    {emotion === "normal" && (
+      <>
+        <img
+          src="/cat/cat_normal.png"
+          width={220}
+          alt="Normal Cat"
+        />
+
+        <p>
+          วันนี้เรื่อย ๆ สบาย ๆ เนอะ
+        </p>
+      </>
+    )}
+
+    {emotion === "happy" && (
+      <>
+        <img
+          src="/cat/cat_happy.png"
+          width={220}
+          alt="Happy Cat"
+        />
+
+        <p>
+          ใจฟูเลยสินะ 😊
+        </p>
+      </>
+    )}
 
     <textarea
       value={message}
       onChange={(e) =>
         setMessage(e.target.value)
       }
-      placeholder="พิมพ์ได้เต็มที่เลย..."
+      placeholder="อยากเล่าอะไรให้จ้มฟังไหม..."
       rows={6}
       style={{
         width: "100%",
         maxWidth: 400,
         padding: 12,
         borderRadius: 12,
+        marginTop: 16,
       }}
     />
-
-    <br />
 
     <button
       onClick={() =>
         setStep("interaction")
       }
       disabled={!message.trim()}
+      style={{
+        marginTop: 16,
+      }}
     >
       ส่งให้จ้ม
     </button>
