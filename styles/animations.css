@@ -24,6 +24,24 @@
   }
 }
 
+@keyframes tiredBreathing {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.08);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+.tired-breathing {
+  animation: tiredBreathing 1.2s ease-in-out infinite;
+}
+
 @keyframes floatingHeart {
   0% {
     opacity: 0;
