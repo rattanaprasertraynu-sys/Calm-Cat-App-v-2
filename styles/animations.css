@@ -30,7 +30,7 @@
   }
 
   50% {
-    transform: scale(1.08);
+    transform: scale(1.04);
   }
 
   100% {
@@ -39,7 +39,7 @@
 }
 
 .tired-breathing {
-  animation: tiredBreathing 1.2s ease-in-out infinite;
+  animation: tiredBreathing 2s ease-in-out infinite;
 }
 
 @keyframes floatingHeart {
