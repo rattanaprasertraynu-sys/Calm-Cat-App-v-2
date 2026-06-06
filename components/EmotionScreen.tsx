@@ -29,6 +29,12 @@ return ( <div className="emotion-container">
 
  {step === "select" && (
   <>
+    <img
+      src="/cat/cat_idle.png"
+      width={220}
+      className="breathing"
+      alt="Idle Cat"
+    />
     <h1 className="emotion-title">
       วันนี้รู้สึกอย่างไรบ้าง
     </h1>
