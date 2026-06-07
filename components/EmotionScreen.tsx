@@ -29,7 +29,7 @@ const [message, setMessage] =
 const [touched, setTouched] =
   useState(false);
 
-const [sadTearCount, setSadTearCount] =
+const [sadStainCount, setSadStainCount] =
   useState(0);
 
 const [sadPawVisible, setSadPawVisible] =
@@ -206,7 +206,7 @@ return ( <div className="emotion-container">
           6
         );
 
-        setSadTearCount(tears);
+        setsadStainCount(tears);
       }
     }}
     placeholder="อยากเล่าอะไรให้จ้มฟังไหม..."
@@ -223,7 +223,7 @@ return ( <div className="emotion-container">
   {emotion === "sad" && (
     <div className="tear-layer">
       {Array.from({
-        length: sadTearCount,
+        length: sadStainCount,
       }).map((_, i) => (
         <div
           key={i}
