@@ -89,3 +89,42 @@
 
   padding: 20px;
 }
+
+.tear-layer {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  height: 80px;
+  margin-top: 8px;
+}
+
+.tear {
+  position: absolute;
+
+  width: 12px;
+  height: 18px;
+
+  background: #9edcff;
+
+  border-radius: 50%;
+
+  filter: blur(1px);
+
+  animation: tearFall 3s linear infinite;
+}
+
+@keyframes tearFall {
+  0% {
+    opacity: 0;
+    transform: translateY(0);
+  }
+
+  20% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(60px);
+  }
+}
