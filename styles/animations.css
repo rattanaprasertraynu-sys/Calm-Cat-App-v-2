@@ -143,3 +143,38 @@
 
   pointer-events: none;
 }
+
+.tear {
+  position: absolute;
+
+  width: 14px;
+  height: 20px;
+
+  border-radius: 50% 50% 60% 60%;
+
+  background: rgba(
+    120,
+    190,
+    255,
+    0.8
+  );
+
+  animation: tearFloat 2s ease infinite;
+}
+
+@keyframes tearFloat {
+  0% {
+    transform: translateY(0);
+    opacity: 0.8;
+  }
+
+  50% {
+    transform: translateY(4px);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(0);
+    opacity: 0.8;
+  }
+}
