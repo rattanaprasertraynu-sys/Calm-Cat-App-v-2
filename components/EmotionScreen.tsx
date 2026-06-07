@@ -229,8 +229,8 @@ return ( <div className="emotion-container">
           key={i}
           className="tear"
           style={{
-            left: `${15 + i * 15}%`,
-            top: `${20 + (i % 3) * 20}%`,
+           left: `${20 + i * 12}%`,
+top: `${25 + (i % 2) * 20}%`,
           }}
         />
       ))}
