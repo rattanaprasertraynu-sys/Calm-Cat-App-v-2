@@ -245,7 +245,9 @@ return ( <div className="emotion-container">
     </button>
   </>
 )}
-    {submitted && !touched && (
+   {submitted &&
+ emotion === "tired" &&
+ !touched && (
   <p
     style={{
       marginTop: 20,
@@ -258,7 +260,9 @@ return ( <div className="emotion-container">
   </p>
 )}
 
-{submitted && touched && (
+{submitted &&
+ emotion === "tired" &&
+ touched && (
   <p
     style={{
       marginTop: 20,
@@ -268,6 +272,22 @@ return ( <div className="emotion-container">
     ขอบคุณนะ...
     <br />
     เจ้าเหมียวเริ่มผ่อนคลายแล้ว 💛
+  </p>
+)}
+
+{submitted &&
+ emotion === "sad" && (
+  <p
+    style={{
+      marginTop: 20,
+      fontSize: 18,
+    }}
+  >
+    จ้มรับฟังอยู่นะ...
+    <br />
+    ไม่เป็นไรนะ
+    <br />
+    ขอซับน้ำตาให้หน่อย 🐾
   </p>
 )}
     
