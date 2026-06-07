@@ -197,23 +197,38 @@ return ( <div className="emotion-container">
     setMessage(value);
 
     if (emotion === "sad") {
-      const tears = Math.min(
-        Math.floor(value.length / 35),
-        6
-      );
+  const tears = Math.min(
+    Math.floor(value.length / 35),
+    6
+  );
 
-      setSadTearCount(tears);
-    }
-  }}
+  setSadTearCount(tears);
+
+  // เริ่มพร่าเมื่อมีน้ำตา 3 หยดขึ้นไป
+  setSadTextBlur(tears >= 3);
+}
   placeholder="อยากเล่าอะไรให้จ้มฟังไหม..."
   rows={6}
   style={{
-    width: "100%",
-    maxWidth: 400,
-    padding: 12,
-    borderRadius: 12,
-    marginTop: 16,
-  }}
+  width: "100%",
+  maxWidth: 400,
+  padding: 12,
+  borderRadius: 12,
+  marginTop: 16,
+
+  filter:
+    emotion === "sad"
+      ? sadTearCount >= 5
+        ? "blur(1.5px)"
+        : sadTearCount >= 4
+        ? "blur(1px)"
+        : sadTearCount >= 3
+        ? "blur(0.5px)"
+        : "none"
+      : "none",
+
+  transition: "filter 0.5s ease",
+}}
 />
 
 {emotion === "sad" && (
