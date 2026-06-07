@@ -189,61 +189,55 @@ return ( <div className="emotion-container">
 
     {!submitted && (
   <>
+
+
+ <div className="sad-text-wrapper">
+
   <textarea
-  value={message}
-  onChange={(e) => {
-    const value = e.target.value;
+    value={message}
+    onChange={(e) => {
+      const value = e.target.value;
 
-    setMessage(value);
+      setMessage(value);
 
-    if (emotion === "sad") {
-      const tears = Math.min(
-        Math.floor(value.length / 35),
-        6
-      );
+      if (emotion === "sad") {
+        const tears = Math.min(
+          Math.floor(value.length / 35),
+          6
+        );
 
-      setSadTearCount(tears);
-    }
-  }}
-  placeholder="อยากเล่าอะไรให้จ้มฟังไหม..."
-  rows={6}
-  style={{
-    width: "100%",
-    maxWidth: 400,
-    padding: 12,
-    borderRadius: 12,
-    marginTop: 16,
+        setSadTearCount(tears);
+      }
+    }}
+    placeholder="อยากเล่าอะไรให้จ้มฟังไหม..."
+    rows={6}
+    style={{
+      width: "100%",
+      maxWidth: 400,
+      padding: 12,
+      borderRadius: 12,
+      marginTop: 16,
+    }}
+  />
 
-    filter:
-      emotion === "sad"
-        ? sadTearCount >= 5
-          ? "blur(1.5px)"
-          : sadTearCount >= 4
-          ? "blur(1px)"
-          : sadTearCount >= 3
-          ? "blur(0.5px)"
-          : "none"
-        : "none",
+  {emotion === "sad" && (
+    <div className="tear-layer">
+      {Array.from({
+        length: sadTearCount,
+      }).map((_, i) => (
+        <div
+          key={i}
+          className="tear"
+          style={{
+            left: `${15 + i * 15}%`,
+            top: `${20 + (i % 3) * 20}%`,
+          }}
+        />
+      ))}
+    </div>
+  )}
 
-    transition: "filter 0.5s ease",
-  }}
-/>
-
-{emotion === "sad" && (
-  <div className="sad-text-wrapper">
-    {Array.from({
-      length: sadTearCount,
-    }).map((_, i) => (
-      <div
-        key={i}
-        className="tear"
-        style={{
-          left: `${30 + i * 45}px`,
-        }}
-      />
-    ))}
-  </div>
-)}
+</div>
 
     <button
       onClick={() =>
