@@ -29,6 +29,12 @@ const [message, setMessage] =
 const [touched, setTouched] =
   useState(false);
 
+const [sadTearCount, setSadTearCount] =
+  useState(0);
+
+const [sadPawVisible, setSadPawVisible] =
+  useState(false);
+
 return ( <div className="emotion-container">
 
 
@@ -183,21 +189,48 @@ return ( <div className="emotion-container">
 
     {!submitted && (
   <>
-    <textarea
-      value={message}
-      onChange={(e) =>
-        setMessage(e.target.value)
-      }
-      placeholder="อยากเล่าอะไรให้จ้มฟังไหม..."
-      rows={6}
-      style={{
-        width: "100%",
-        maxWidth: 400,
-        padding: 12,
-        borderRadius: 12,
-        marginTop: 16,
-      }}
-    />
+   <textarea
+  value={message}
+  onChange={(e) => {
+    const value = e.target.value;
+
+    setMessage(value);
+
+    if (emotion === "sad") {
+      const tears = Math.min(
+        Math.floor(value.length / 35),
+        6
+      );
+
+      setSadTearCount(tears);
+    }
+  }}
+  placeholder="อยากเล่าอะไรให้จ้มฟังไหม..."
+  rows={6}
+  style={{
+    width: "100%",
+    maxWidth: 400,
+    padding: 12,
+    borderRadius: 12,
+    marginTop: 16,
+  }}
+/>
+
+{emotion === "sad" && (
+  <div className="tear-layer">
+    {Array.from({
+      length: sadTearCount,
+    }).map((_, i) => (
+      <div
+        key={i}
+        className="tear"
+        style={{
+          left: `${30 + i * 45}px`,
+        }}
+      />
+    ))}
+  </div>
+)}
 
     <button
       onClick={() =>
