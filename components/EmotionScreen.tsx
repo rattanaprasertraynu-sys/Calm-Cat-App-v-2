@@ -221,7 +221,7 @@ return ( <div className="emotion-container">
   />
 
   {emotion === "sad" && (
-    <div className="tear-layer">
+   <div className="stain-layer">
       {Array.from({
         length: sadStainCount,
       }).map((_, i) => (
