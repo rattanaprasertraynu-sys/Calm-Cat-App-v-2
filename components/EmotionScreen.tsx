@@ -206,7 +206,7 @@ return ( <div className="emotion-container">
           6
         );
 
-        setsadStainCount(tears);
+        setSadStainCount(tears);
       }
     }}
     placeholder="อยากเล่าอะไรให้จ้มฟังไหม..."
