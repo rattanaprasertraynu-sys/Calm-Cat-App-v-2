@@ -217,10 +217,25 @@ return ( <div className="emotion-container">
       padding: 12,
       borderRadius: 12,
       marginTop: 16,
-    }}
-  />
+   color:
+     emotion === "sad"
+       ? sadStainCount >= 5
+         ? "rgba(0,0,0,0.55)"
+         : sadStainCount >= 3
+         ? "rgba(0,0,0,0.75)"
+         : "rgba(0,0,0,1)"
+       : "rgba(0,0,0,1)",
 
-<p>
+   transition:
+     "color 0.6s ease",
+   textShadow:
+      emotion === "sad" &&
+      sadStainCount >= 4
+        ? "0 0 2px rgba(0,0,0,0.10)"
+        : "none",
+ }}
+/>
+   <p>
   Stains: {sadStainCount}
 </p>
 
