@@ -94,10 +94,15 @@
 .sad-stain {
   position: absolute;
 
-  width: 70px;
-  height: 70px;
+  width: 80px;
+  height: 80px;
+
+  background: red;
+
+  opacity: 0.5;
 
   border-radius: 50%;
+}
 
   background:
     radial-gradient(
