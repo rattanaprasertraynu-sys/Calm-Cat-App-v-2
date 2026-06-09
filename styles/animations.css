@@ -120,13 +120,17 @@
   background:
     radial-gradient(
       circle,
-      rgba(120,120,120,0.18) 0%,
-      rgba(120,120,120,0.10) 40%,
-      rgba(120,120,120,0.04) 70%,
-      transparent 90%
+      rgba(120,120,120,0.12) 0%,
+      rgba(120,120,120,0.08) 35%,
+      rgba(120,120,120,0.04) 60%,
+      transparent 85%
     );
 
-  filter: blur(8px);
+  filter: blur(10px);
+
+  transform:
+    scaleX(1.4)
+    rotate(-8deg);
 
   pointer-events: none;
 }
