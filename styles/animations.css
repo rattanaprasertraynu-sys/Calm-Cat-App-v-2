@@ -98,19 +98,26 @@
   margin-top: 8px;
 }
 
-.tear {
+.sad-stain {
   position: absolute;
 
-  width: 12px;
-  height: 18px;
-
-  background: #9edcff;
+  width: 70px;
+  height: 70px;
 
   border-radius: 50%;
 
-  filter: blur(1px);
+  background:
+    radial-gradient(
+      circle,
+      rgba(255,255,255,0.10) 0%,
+      rgba(255,255,255,0.05) 45%,
+      rgba(255,255,255,0.02) 65%,
+      transparent 85%
+    );
 
-  animation: tearFall 3s linear infinite;
+  filter: blur(5px);
+
+  pointer-events: none;
 }
 
 @keyframes tearFall {
