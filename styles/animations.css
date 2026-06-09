@@ -112,25 +112,21 @@
 .sad-stain {
   position: absolute;
 
-  width: 70px;
-  height: 70px;
+  width: 90px;
+  height: 90px;
 
   border-radius: 50%;
 
   background:
     radial-gradient(
       circle,
-      rgba(255,255,255,0.08) 0%,
-      rgba(255,255,255,0.05) 35%,
-      rgba(255,255,255,0.02) 60%,
-      transparent 85%
+      rgba(120,120,120,0.18) 0%,
+      rgba(120,120,120,0.10) 40%,
+      rgba(120,120,120,0.04) 70%,
+      transparent 90%
     );
 
-  filter: blur(6px);
-
-  transform:
-    scaleX(1.25)
-    rotate(-8deg);
+  filter: blur(8px);
 
   pointer-events: none;
 }
