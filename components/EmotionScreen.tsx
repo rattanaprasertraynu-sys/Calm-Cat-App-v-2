@@ -194,7 +194,7 @@ return ( <div className="emotion-container">
  <div className="sad-text-wrapper">
 
   <textarea
-    value={message}
+   value={message}
     onChange={(e) => {
       const value = e.target.value;
 
@@ -219,6 +219,10 @@ return ( <div className="emotion-container">
       marginTop: 16,
     }}
   />
+
+<p>
+  Stains: {sadStainCount}
+</p>
 
   {emotion === "sad" && (
    <div className="stain-layer">
