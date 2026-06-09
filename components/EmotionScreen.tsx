@@ -310,23 +310,26 @@ top: `${25 + (i % 2) * 20}%`,
 
 {submitted &&
  emotion === "sad" && (
- {sadPawVisible && (
-  <div className="sad-paw">
-    🐾
-  </div>
-)}
-  <p
-    style={{
-      marginTop: 20,
-      fontSize: 18,
-    }}
-  >
-    จ้มรับฟังอยู่นะ...
-    <br />
-    ไม่เป็นไรนะ
-    <br />
-    ขอซับน้ำตาให้หน่อย 🐾
-  </p>
+  <>
+    {sadPawVisible && (
+      <div className="sad-paw">
+        🐾
+      </div>
+    )}
+
+    <p
+      style={{
+        marginTop: 20,
+        fontSize: 18,
+      }}
+    >
+      จ้มรับฟังอยู่นะ...
+      <br />
+      ไม่เป็นไรนะ
+      <br />
+      ขอซับน้ำตาให้หน่อย 🐾
+    </p>
+  </>
 )}
     
   </>
