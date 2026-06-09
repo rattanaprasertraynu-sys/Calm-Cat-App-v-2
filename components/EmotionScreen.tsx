@@ -201,13 +201,13 @@ return ( <div className="emotion-container">
       setMessage(value);
 
       if (emotion === "sad") {
-        const tears = Math.min(
-          Math.floor(value.length / 35),
-          6
-        );
+  const stains = Math.min(
+    Math.floor(value.length / 35),
+    6
+  );
 
-        setSadStainCount(tears);
-      }
+  setSadStainCount(stains);
+}
     }}
     placeholder="อยากเล่าอะไรให้จ้มฟังไหม..."
     rows={6}
