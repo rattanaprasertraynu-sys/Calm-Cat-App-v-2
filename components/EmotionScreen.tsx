@@ -227,7 +227,7 @@ return ( <div className="emotion-container">
       }).map((_, i) => (
         <div
           key={i}
-          className="tear"
+        className="sad-stain"
           style={{
            left: `${20 + i * 12}%`,
 top: `${25 + (i % 2) * 20}%`,
