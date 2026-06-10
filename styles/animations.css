@@ -178,5 +178,51 @@
   }
 }
 
+.left-heart {
+  position: absolute;
+  left: 55px;
+  top: 120px;
+
+  animation:
+    floatLeft 2s ease forwards;
+}
+
+.right-heart {
+  position: absolute;
+  right: 55px;
+  top: 120px;
+
+  animation:
+    floatRight 2s ease forwards;
+}
+
+@keyframes floatLeft {
+  from {
+    opacity: 0;
+    transform: translateY(0);
+  }
+
+  to {
+    opacity: 0;
+    transform:
+      translateX(-20px)
+      translateY(-40px);
+  }
+}
+
+@keyframes floatRight {
+  from {
+    opacity: 0;
+    transform: translateY(0);
+  }
+
+  to {
+    opacity: 0;
+    transform:
+      translateX(20px)
+      translateY(-40px);
+  }
+}
+
 
 
