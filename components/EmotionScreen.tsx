@@ -265,7 +265,7 @@ top: `${25 + (i % 2) * 20}%`,
 
 </div>
    
-</div>
+
 
    {submitted ? null : (
   <button
