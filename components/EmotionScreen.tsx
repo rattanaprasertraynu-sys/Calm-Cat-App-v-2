@@ -189,9 +189,7 @@ return ( <div className="emotion-container">
     <div className="heart h6">💗</div>
   </>
 )}
-        </>
-      )}
-
+        
     </div>
 
     <p>
