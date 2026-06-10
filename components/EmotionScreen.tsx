@@ -187,10 +187,7 @@ return ( <div className="emotion-container">
       </>
     )}
 
-   <div className="sad-text-wrapper">
-  <>
-
-
+ 
  <div className="sad-text-wrapper">
 
   <textarea
