@@ -187,7 +187,7 @@ return ( <div className="emotion-container">
       </>
     )}
 
-    {!submitted && (
+   <div className="sad-text-wrapper">
   <>
 
 
@@ -258,25 +258,22 @@ top: `${25 + (i % 2) * 20}%`,
 
 </div>
 
-    <button
-      onClick={() => {
-  setSubmitted(true);
+   {submitted ? null : (
+  <button
+    onClick={() => {
+      setSubmitted(true);
 
-  if (emotion === "sad") {
-    setSadPawVisible(true);
-    setTimeout(() => {
-  setSadStainCount(0);
-}, 1000);
-  }
-}}
-      disabled={!message.trim()}
-      style={{
-        marginTop: 16,
-      }}
-    >
-      ส่งให้จ้ม
-    </button>
-  </>
+      if (emotion === "sad") {
+        setSadPawVisible(true);
+
+        setTimeout(() => {
+          setSadStainCount(0);
+        }, 1200);
+      }
+    }}
+  >
+    ส่งให้จ้ม
+  </button>
 )}
    {submitted &&
  emotion === "tired" &&
@@ -312,9 +309,13 @@ top: `${25 + (i % 2) * 20}%`,
  emotion === "sad" && (
   <>
     {sadPawVisible && (
-      <div className="sad-paw">
-        🐾
-      </div>
+     <div className="sad-paw">
+  <img
+    src="/cat/paw.png"
+    alt="Paw"
+    width={90}
+  />
+</div>
     )}
 
     <p
