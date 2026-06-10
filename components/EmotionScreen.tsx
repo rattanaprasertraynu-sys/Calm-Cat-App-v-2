@@ -276,8 +276,8 @@ top: `${25 + (i % 2) * 20}%`,
         setSadPawVisible(true);
 
         setTimeout(() => {
-          setSadStainCount(0);
-        }, 1200);
+  setSadStainCount(0);
+}, 2500);
       }
     }}
   >
