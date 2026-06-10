@@ -180,8 +180,7 @@ return ( <div className="emotion-container">
 
       {blush && (
         <>
-          {blush && (
-  <>
+         
     <div className="heart h1">💗</div>
     <div className="heart h2">💗</div>
     <div className="heart h3">💗</div>
