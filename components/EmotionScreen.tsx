@@ -26,6 +26,9 @@ const [message, setMessage] =
   const [submitted, setSubmitted] =
   useState(false);
 
+  const [blush, setBlush] =
+  useState(false);
+
 const [touched, setTouched] =
   useState(false);
 
@@ -81,6 +84,7 @@ return ( <div className="emotion-container">
 
       <button
         onClick={() => {
+          setBlush(false);
           setEmotion("normal");
           setStep("diary");
         }}
@@ -160,18 +164,39 @@ return ( <div className="emotion-container">
     )}
 
     {emotion === "normal" && (
-      <>
-        <img
-          src="/cat/cat_normal.png"
-          width={220}
-          alt="Normal Cat"
-        />
+  <>
+    <div className="cat-wrapper">
 
-        <p>
-          วันนี้เรื่อย ๆ สบาย ๆ เนอะ
-        </p>
-      </>
-    )}
+      <img
+        src="/cat/cat_normal.png"
+        width={220}
+        alt="Normal Cat"
+        onClick={() => {
+          if (submitted) {
+            setBlush(true);
+          }
+        }}
+      />
+
+      {blush && (
+        <>
+          <div className="left-heart">
+            💗
+          </div>
+
+          <div className="right-heart">
+            💗
+          </div>
+        </>
+      )}
+
+    </div>
+
+    <p>
+      วันนี้เรื่อย ๆ สบาย ๆ เนอะ
+    </p>
+  </>
+)}
 
     {emotion === "happy" && (
       <>
@@ -336,7 +361,18 @@ top: `${25 + (i % 2) * 20}%`,
   </>
 )}
 
-
+{submitted &&
+ emotion === "normal" &&
+ blush && (
+  <p
+    style={{
+      marginTop: 20,
+      fontSize: 18,
+    }}
+  >
+    เขินนะนุด ☺️
+  </p>
+)}
   </div>
 
 );
