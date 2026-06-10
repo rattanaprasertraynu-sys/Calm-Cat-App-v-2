@@ -180,13 +180,16 @@ return ( <div className="emotion-container">
 
       {blush && (
         <>
-          <div className="left-heart">
-            💗
-          </div>
-
-          <div className="right-heart">
-            💗
-          </div>
+          {blush && (
+  <>
+    <div className="heart h1">💗</div>
+    <div className="heart h2">💗</div>
+    <div className="heart h3">💗</div>
+    <div className="heart h4">💗</div>
+    <div className="heart h5">💗</div>
+    <div className="heart h6">💗</div>
+  </>
+)}
         </>
       )}
 
@@ -361,6 +364,21 @@ top: `${25 + (i % 2) * 20}%`,
   </>
 )}
 
+{submitted &&
+ emotion === "normal" &&
+ !blush && (
+  <p
+    style={{
+      marginTop: 20,
+      fontSize: 18,
+    }}
+  >
+    จ้มอ่านแล้วนะ...
+    <br />
+    แตะแก้มจ้มได้เลย ☺️🐾
+  </p>
+)}
+  
 {submitted &&
  emotion === "normal" &&
  blush && (
