@@ -182,7 +182,6 @@
   }
 }
 
-
 .left-heart {
   position: absolute;
   left: 55px;
@@ -238,5 +237,68 @@
   }
 }
 
+.cat-wrapper {
+  position: relative;
+  display: inline-block;
+}
 
+.heart {
+  position: absolute;
+  font-size: 28px;
+  animation: heartFloat 2s ease forwards;
+}
+
+.h1 {
+  left: 40px;
+  top: 120px;
+  animation-delay: 0s;
+}
+
+.h2 {
+  left: 20px;
+  top: 150px;
+  animation-delay: 0.1s;
+}
+
+.h3 {
+  left: 60px;
+  top: 170px;
+  animation-delay: 0.2s;
+}
+
+.h4 {
+  right: 40px;
+  top: 120px;
+  animation-delay: 0.3s;
+}
+
+.h5 {
+  right: 20px;
+  top: 150px;
+  animation-delay: 0.4s;
+}
+
+.h6 {
+  right: 60px;
+  top: 170px;
+  animation-delay: 0.5s;
+}
+
+@keyframes heartFloat {
+  0% {
+    opacity: 0;
+    transform: translateY(0) scale(0.7);
+  }
+
+  20% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    transform:
+      translateY(-150px)
+      scale(1.2);
+  }
+}
 
