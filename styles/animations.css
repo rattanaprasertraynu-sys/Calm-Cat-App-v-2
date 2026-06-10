@@ -131,19 +131,25 @@
   pointer-events: none;
 }
 .sad-paw {
-  font-size: 60px;
+  position: absolute;
 
-  margin-top: 20px;
+  left: 50%;
+  top: 50%;
+
+  transform: translate(-50%, -50%);
+
+  z-index: 20;
+
+  pointer-events: none;
 
   animation:
     pawTap 1.2s ease forwards;
 }
-
 @keyframes pawTap {
 
   0% {
     transform:
-      translateY(-60px)
+      translate(-50%, -120%)
       scale(0.8);
 
     opacity: 0;
@@ -151,7 +157,7 @@
 
   40% {
     transform:
-      translateY(0)
+      translate(-50%, -50%)
       scale(1.2);
 
     opacity: 1;
@@ -159,13 +165,13 @@
 
   60% {
     transform:
-      translateY(10px)
+      translate(-50%, -40%)
       scale(1);
   }
 
   100% {
     transform:
-      translateY(0)
+      translate(-50%, -50%)
       scale(1);
 
     opacity: 1;
