@@ -90,6 +90,10 @@
   padding: 20px;
 }
 
+.cat-wrapper {
+  position: relative;
+  display: inline-block;
+}
 .sad-text-wrapper {
   position: relative;
 
@@ -178,6 +182,7 @@
   }
 }
 
+
 .left-heart {
   position: absolute;
   left: 55px;
@@ -191,7 +196,7 @@
   position: absolute;
   right: 55px;
   top: 120px;
-
+  font-size: 28px;
   animation:
     floatRight 2s ease forwards;
 }
