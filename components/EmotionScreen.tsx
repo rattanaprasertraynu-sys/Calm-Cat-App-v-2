@@ -253,6 +253,18 @@ top: `${25 + (i % 2) * 20}%`,
     </div>
   )}
 
+    {sadPawVisible && (
+    <div className="sad-paw">
+      <img
+        src="/cat/paw.png"
+        alt="Paw"
+        width={90}
+      />
+    </div>
+  )}
+
+</div>
+   
 </div>
 
    {submitted ? null : (
@@ -305,16 +317,7 @@ top: `${25 + (i % 2) * 20}%`,
 {submitted &&
  emotion === "sad" && (
   <>
-    {sadPawVisible && (
-     <div className="sad-paw">
-  <img
-    src="/cat/paw.png"
-    alt="Paw"
-    width={90}
-  />
-</div>
-    )}
-
+  
     <p
       style={{
         marginTop: 20,
