@@ -267,10 +267,7 @@ return ( <div className="emotion-container">
         : "none",
  }}
 />
-   <p>
-  Stains: {sadStainCount}
-</p>
-
+  
   {emotion === "sad" && (
    <div className="stain-layer">
       {Array.from({
@@ -301,19 +298,7 @@ top: `${25 + (i % 2) * 20}%`,
  {submitted &&
  emotion === "anxious" &&
  !swiped && (
-  <>
-    <p
-      style={{
-        marginTop: 20,
-        fontSize: 18,
-      }}
-    >
-      จ้มอ่านแล้วนะ...
-      <br />
-      ช่วยปัดความกังวลออกไปไหม 🐾
-    </p>
-
-    <div
+  <div
       className="swipe-paw"
       onClick={() =>
         setSwiped(true)
@@ -325,8 +310,24 @@ top: `${25 + (i % 2) * 20}%`,
         alt="Paw"
       />
     </div>
-  </>
+  )}
+
+</div>
+ {submitted &&
+ emotion === "anxious" &&
+ !swiped && (
+  <p
+    style={{
+      marginTop: 20,
+      fontSize: 18,
+    }}
+  >
+    จ้มอ่านแล้วนะ...
+    <br />
+    ช่วยปัดความกังวลออกไปไหม 🐾
+  </p>
 )}
+
 
 {submitted &&
  emotion === "anxious" &&
