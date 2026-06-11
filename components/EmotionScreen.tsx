@@ -32,6 +32,9 @@ const [message, setMessage] =
 const [touched, setTouched] =
   useState(false);
 
+  const [swiped, setSwiped] =
+  useState(false);
+  
 const [sadStainCount, setSadStainCount] =
   useState(0);
 
@@ -216,7 +219,14 @@ return ( <div className="emotion-container">
  <div className="sad-text-wrapper">
 
   <textarea
+   className={
+  emotion === "anxious" &&
+  swiped
+    ? "swiped-away"
+    : ""
+}
    value={message}
+    
     onChange={(e) => {
       const value = e.target.value;
 
@@ -288,6 +298,23 @@ top: `${25 + (i % 2) * 20}%`,
     </div>
   )}
 
+  {submitted &&
+ emotion === "anxious" &&
+ !swiped && (
+  <div
+    className="swipe-paw"
+    onClick={() =>
+      setSwiped(true)
+    }
+  >
+    <img
+      src="/cat/paw.png"
+      width={90}
+      alt="Paw"
+    />
+  </div>
+)}
+   
 </div>
    
 
@@ -388,6 +415,22 @@ top: `${25 + (i % 2) * 20}%`,
     เขินนะนุด ☺️
   </p>
 )}
+
+{submitted &&
+ emotion === "anxious" &&
+ !swiped && (
+  <p
+    style={{
+      marginTop: 20,
+      fontSize: 18,
+    }}
+  >
+    จ้มอ่านแล้วนะ...
+    <br />
+    ช่วยปัดความกังวลออกไปไหม 🐾
+  </p>
+)}
+  
   </div>
 
 );
