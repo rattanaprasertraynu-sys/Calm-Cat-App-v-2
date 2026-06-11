@@ -181,19 +181,16 @@ return ( <div className="emotion-container">
         }}
       />
 
-      {blush && (
-        <>
-         
+     {blush && (
+  <div className="heart-container">
     <div className="heart h1">💗</div>
     <div className="heart h2">💗</div>
     <div className="heart h3">💗</div>
     <div className="heart h4">💗</div>
     <div className="heart h5">💗</div>
     <div className="heart h6">💗</div>
-  </>
+  </div>
 )}
-        
-    </div>
 
     <p>
       วันนี้เรื่อย ๆ สบาย ๆ เนอะ
@@ -412,10 +409,7 @@ top: `${25 + (i % 2) * 20}%`,
   </>
 )}
     
-  </>
-)}
-
-{submitted &&
+ {submitted &&
  emotion === "normal" &&
  !blush && (
   <p
