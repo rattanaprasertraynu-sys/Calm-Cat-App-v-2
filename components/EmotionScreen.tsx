@@ -298,10 +298,40 @@ top: `${25 + (i % 2) * 20}%`,
     </div>
   )}
 
-  {submitted &&
+ {submitted &&
  emotion === "anxious" &&
  !swiped && (
- <p
+  <>
+    <p
+      style={{
+        marginTop: 20,
+        fontSize: 18,
+      }}
+    >
+      จ้มอ่านแล้วนะ...
+      <br />
+      ช่วยปัดความกังวลออกไปไหม 🐾
+    </p>
+
+    <div
+      className="swipe-paw"
+      onClick={() =>
+        setSwiped(true)
+      }
+    >
+      <img
+        src="/cat/paw.png"
+        width={90}
+        alt="Paw"
+      />
+    </div>
+  </>
+)}
+
+{submitted &&
+ emotion === "anxious" &&
+ swiped && (
+  <p
     style={{
       marginTop: 20,
       fontSize: 18,
@@ -309,19 +339,6 @@ top: `${25 + (i % 2) * 20}%`,
   >
     หายใจลึก ๆ ไปด้วยกันนะ 🌿
   </p>
-)}
-  <div
-    className="swipe-paw"
-    onClick={() =>
-      setSwiped(true)
-    }
-  >
-    <img
-      src="/cat/paw.png"
-      width={90}
-      alt="Paw"
-    />
-  </div>
 )}
    
 </div>
@@ -428,19 +445,19 @@ top: `${25 + (i % 2) * 20}%`,
 {submitted &&
  emotion === "anxious" &&
  !swiped && (
-  <p
-    style={{
-      marginTop: 20,
-      fontSize: 18,
-    }}
+  <div
+    className="swipe-paw"
+    onClick={() =>
+      setSwiped(true)
+    }
   >
-    จ้มอ่านแล้วนะ...
-    <br />
-    ช่วยปัดความกังวลออกไปไหม 🐾
-  </p>
-)}
-  
+    <img
+      src="/cat/paw.png"
+      width={90}
+      alt="Paw"
+    />
   </div>
+)}
 
 );
 }
