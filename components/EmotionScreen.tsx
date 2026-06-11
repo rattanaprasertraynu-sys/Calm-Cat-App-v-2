@@ -191,6 +191,7 @@ return ( <div className="emotion-container">
     <div className="heart h6">💗</div>
   </div>
 )}
+  </div>
 
     <p>
       วันนี้เรื่อย ๆ สบาย ๆ เนอะ
@@ -309,7 +310,7 @@ top: `${25 + (i % 2) * 20}%`,
     </div>
   )}
 
-</div>
+
  {submitted &&
  emotion === "anxious" &&
  !swiped && (
