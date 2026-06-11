@@ -330,7 +330,17 @@
 
 .swiped-away {
   animation:
-    swipeAway 1.5s ease forwards;
+    fadeWorry 2s ease forwards;
+}
+
+@keyframes fadeWorry {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0.25;
+  }
 }
 
 @keyframes swipeAway {
