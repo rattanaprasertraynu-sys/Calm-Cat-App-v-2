@@ -302,3 +302,49 @@
   }
 }
 
+.swipe-paw {
+  margin-top: 20px;
+
+  cursor: pointer;
+
+  animation:
+    pawInvite 1.5s ease-in-out infinite;
+}
+
+@keyframes pawInvite {
+  0% {
+    transform:
+      translateX(0);
+  }
+
+  50% {
+    transform:
+      translateX(10px);
+  }
+
+  100% {
+    transform:
+      translateX(0);
+  }
+}
+
+.swiped-away {
+  animation:
+    swipeAway 1.5s ease forwards;
+}
+
+@keyframes swipeAway {
+  0% {
+    opacity: 1;
+    transform:
+      translateX(0);
+  }
+
+  100% {
+    opacity: 0;
+    transform:
+      translateX(250px);
+  }
+}
+
+
