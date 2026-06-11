@@ -301,6 +301,15 @@ top: `${25 + (i % 2) * 20}%`,
   {submitted &&
  emotion === "anxious" &&
  !swiped && (
+ <p
+    style={{
+      marginTop: 20,
+      fontSize: 18,
+    }}
+  >
+    หายใจลึก ๆ ไปด้วยกันนะ 🌿
+  </p>
+)}
   <div
     className="swipe-paw"
     onClick={() =>
