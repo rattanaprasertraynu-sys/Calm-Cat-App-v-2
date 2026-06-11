@@ -441,23 +441,7 @@ top: `${25 + (i % 2) * 20}%`,
     เขินนะนุด ☺️
   </p>
 )}
-
-{submitted &&
- emotion === "anxious" &&
- !swiped && (
-  <div
-    className="swipe-paw"
-    onClick={() =>
-      setSwiped(true)
-    }
-  >
-    <img
-      src="/cat/paw.png"
-      width={90}
-      alt="Paw"
-    />
-  </div>
-)}
+</div>
 
 );
 }
