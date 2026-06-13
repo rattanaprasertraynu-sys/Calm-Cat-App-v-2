@@ -217,15 +217,14 @@ return ( <div className="emotion-container">
  <div className="sad-text-wrapper">
 
   <textarea
-   className={
-  emotion === "anxious" &&
-  swiped
-    ? "swiped-away"
-    : ""
-}
-   value={message}
-   readOnly={submitted}
-    
+  value={
+    emotion === "anxious" &&
+    swiped
+      ? "หายใจลึก ๆ ไปด้วยกันนะ 🌿"
+      : message
+  }
+  readOnly={submitted}
+ />    
     onChange={(e) => {
       const value = e.target.value;
 
@@ -312,21 +311,6 @@ top: `${25 + (i % 2) * 20}%`,
   )}
 
 </div>
-
-{submitted &&
- emotion === "anxious" &&
- swiped && (
-  <p
-    style={{
-      marginTop: 20,
-      fontSize: 18,
-    }}
-  >
-    หายใจลึก ๆ ไปด้วยกันนะ 🌿
-  </p>
-)}
-   
-
 
 
    {submitted ? null : (
