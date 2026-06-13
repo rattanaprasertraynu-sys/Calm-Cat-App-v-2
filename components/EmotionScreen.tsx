@@ -224,6 +224,7 @@ return ( <div className="emotion-container">
     : ""
 }
    value={message}
+   readOnly={submitted}
     
     onChange={(e) => {
       const value = e.target.value;
