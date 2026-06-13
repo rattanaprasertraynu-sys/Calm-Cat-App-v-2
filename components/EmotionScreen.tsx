@@ -427,15 +427,14 @@ top: `${25 + (i % 2) * 20}%`,
 {submitted &&
  emotion === "normal" &&
  blush && (
-  <p
-    style={{
-      marginTop: 20,
-      fontSize: 18,
-    }}
-  >
+  <p>
     เขินนะนุด ☺️
   </p>
 )}
+
+  </>
+)}
+
 </div>
 
 );
