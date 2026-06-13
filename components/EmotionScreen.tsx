@@ -293,22 +293,37 @@ top: `${25 + (i % 2) * 20}%`,
     </div>
   )}
 
- {submitted &&
+{submitted &&
    emotion === "anxious" &&
    !swiped && (
-    <div
-      className="swipe-paw-inside"
-      onClick={() =>
-        setSwiped(true)
-      }
-    >
-      <img
-        src="/cat/paw.png"
-        width={90}
-        alt="Paw"
-      />
-    </div>
-  )}
+    <>
+      <p
+        style={{
+          marginTop: 12,
+          marginBottom: 8,
+          fontSize: 16,
+          lineHeight: 1.5,
+        }}
+      >
+        ส่งความวุ่นวายมาให้จ้มเถอะ
+        <br />
+        แตะอุ้งเท้าจ้ม 🐾
+      </p>
+
+      <div
+        className="swipe-paw-inside"
+        onClick={() =>
+          setSwiped(true)
+        }
+      >
+        <img
+          src="/cat/paw.png"
+          width={90}
+          alt="Paw"
+        />
+      </div>
+    </>
+)}
 
 </div>
 
