@@ -294,10 +294,10 @@ top: `${25 + (i % 2) * 20}%`,
   )}
 
  {submitted &&
- emotion === "anxious" &&
- !swiped && (
-  <div
-      className="swipe-paw"
+   emotion === "anxious" &&
+   !swiped && (
+    <div
+      className="swipe-paw-inside"
       onClick={() =>
         setSwiped(true)
       }
@@ -310,22 +310,7 @@ top: `${25 + (i % 2) * 20}%`,
     </div>
   )}
 
-
- {submitted &&
- emotion === "anxious" &&
- !swiped && (
-  <p
-    style={{
-      marginTop: 20,
-      fontSize: 18,
-    }}
-  >
-    จ้มอ่านแล้วนะ...
-    <br />
-    ช่วยปัดความกังวลออกไปไหม 🐾
-  </p>
-)}
-
+</div>
 
 {submitted &&
  emotion === "anxious" &&
