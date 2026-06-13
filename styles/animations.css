@@ -96,7 +96,7 @@
 }
 .sad-text-wrapper {
   position: relative;
-
+   display: inline-block;
   width: 100%;
   max-width: 400px;
 }
@@ -330,7 +330,7 @@
 
 .swiped-away {
   animation:
-    fadeWorry 2s ease forwards;
+    swipeAway 1.5s ease forwards;
 }
 
 @keyframes fadeWorry {
@@ -353,7 +353,7 @@
   100% {
     opacity: 0;
     transform:
-      translateX(250px);
+      translateX(220px);
   }
 }
 
@@ -361,5 +361,44 @@
   position: absolute;
   inset: 0;
   pointer-events: none;
+}
+
+.swipe-paw-inside {
+  position: absolute;
+
+  top: 50%;
+  left: 50%;
+
+  transform:
+    translate(-50%, -50%);
+
+  cursor: pointer;
+
+  animation:
+    pawPulse 1.5s ease-in-out infinite;
+
+  z-index: 20;
+}
+
+@keyframes pawPulse {
+
+  0% {
+    transform:
+      translate(-50%, -50%)
+      scale(1);
+  }
+
+  50% {
+    transform:
+      translate(-50%, -50%)
+      scale(1.08);
+  }
+
+  100% {
+    transform:
+      translate(-50%, -50%)
+      scale(1);
+  }
+
 }
 
