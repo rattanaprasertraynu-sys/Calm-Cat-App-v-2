@@ -216,32 +216,48 @@ return ( <div className="emotion-container">
         src="/cat/cat_happy.png"
         width={220}
         alt="Happy Cat"
-        className={
-          happySparkle
-            ? "happy-powered"
-            : "happy-breathing"
-        }
+       className={
+  happySent
+    ? "happy-powered"
+    : "happy-breathing"
+}
       />
 
       
 
-      {returnHearts && (
-        <div className="return-hearts">
-          <div className="r1">💛</div>
-          <div className="r2">🐾</div>
-          <div className="r3">💛</div>
-          <div className="r4">🐾</div>
-          <div className="r5">💛</div>
-        </div>
-      )}
+     {returnHearts && (
+  <>
+    <div className="fly f1">💛</div>
+    <div className="fly f2">🐾</div>
+    <div className="fly f3">💛</div>
+    <div className="fly f4">🐾</div>
+    <div className="fly f5">💛</div>
+  </>
+)}
 
     </div>
 
-    <p>
-      วันนี้มีเรื่องดี ๆ จนใจฟูเลยใช่ไหมคะ?
-      <br />
-      มาส่งพลังใจดวงโตให้เจ้าเหมียวส้มกันเถอะ!
-    </p>
+   {!happySent ? (
+  <p>
+    วันนี้มีเรื่องดี ๆ จนใจฟูเลยใช่ไหมคะ?
+    <br />
+    มาส่งพลังใจดวงโตให้เจ้าเหมียวส้มกันเถอะ!
+  </p>
+) : (
+  <p
+    style={{
+      marginTop: 20,
+      fontSize: 18,
+      lineHeight: 1.6,
+    }}
+  >
+    รับพลังใจดวงนี้กลับไปด้วยนะ!
+    <br />
+    ขอบคุณที่มาแบ่งปันความสุขให้กัน
+    <br />
+    ขอให้หัวใจฟูฟ่องแบบนี้ไปทั้งวันเลยนะ 💛
+  </p>
+)}
   </>
 )}
 
