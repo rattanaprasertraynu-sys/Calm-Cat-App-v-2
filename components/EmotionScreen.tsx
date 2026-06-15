@@ -72,6 +72,19 @@ const [sendHeartVisible,
  setSendHeartVisible] =
  useState(false);
 
+const goToComfortStage = () => {
+
+  setComfortType(
+    Math.random() < 0.5
+      ? "head"
+      : "belly"
+  );
+
+  setBonusStage(
+    "comfort"
+  );
+};
+
 return ( <div className="emotion-container">
 
 
@@ -395,11 +408,21 @@ top: `${25 + (i % 2) * 20}%`,
           alt="Paw"
         />
       </div>
-    </>
+      </>
+      )}
+   {submitted &&
+ emotion === "anxious" &&
+ swiped && (
+  <button
+    onClick={
+      goToComfortStage
+    }
+  >
+    ไปพักผ่อนกับจ้ม 🐾
+  </button>
 )}
 
 </div>
-
 
    {submitted ? null : (
   <button
@@ -439,8 +462,21 @@ top: `${25 + (i % 2) * 20}%`,
   }, 1500);
 
 }}
+   
   >
     ❤️ ส่งหัวใจให้จ้ม
+  </button>
+)}
+
+  {submitted &&
+ emotion === "happy" &&
+ happySent && (
+  <button
+    onClick={
+      goToComfortStage
+    }
+  >
+    ไปพักผ่อนกับจ้ม 🐾
   </button>
 )}
 
@@ -461,6 +497,7 @@ top: `${25 + (i % 2) * 20}%`,
   </p>
 )}
 
+
 {submitted &&
  emotion === "tired" &&
  touched && (
@@ -474,25 +511,44 @@ top: `${25 + (i % 2) * 20}%`,
     <br />
     เจ้าเหมียวเริ่มผ่อนคลายแล้ว 💛
   </p>
+<button
+      onClick={
+        goToComfortStage
+      }
+    >
+      ไปพักผ่อนกับจ้ม 🐾
+    </button>
+  </>
 )}
+
+
 
 {submitted &&
  emotion === "sad" && (
-  <>
-  
-    <p
-      style={{
-        marginTop: 20,
-        fontSize: 18,
-      }}
-    >
-      จ้มรับฟังอยู่นะ...
-      <br />
-      ไม่เป็นไรนะ
-      <br />
-      ขอซับน้ำตาให้หน่อย 🐾
-    </p>
-  </>
+  <p
+    style={{
+      marginTop: 20,
+      fontSize: 18,
+    }}
+  >
+    จ้มรับฟังอยู่นะ...
+    <br />
+    ไม่เป็นไรนะ
+    <br />
+    ขอซับน้ำตาให้หน่อย 🐾
+  </p>
+)}
+
+{submitted &&
+ emotion === "sad" &&
+ sadStainCount === 0 && (
+  <button
+    onClick={
+      goToComfortStage
+    }
+  >
+    ไปพักผ่อนกับจ้ม 🐾
+  </button>
 )}
     
  {submitted &&
@@ -513,11 +569,23 @@ top: `${25 + (i % 2) * 20}%`,
 {submitted &&
  emotion === "normal" &&
  blush && (
-  <p>
-    เขินนะนุด ☺️
-  </p>
-)}
+  <>
+    <p
+      style={{
+        marginTop: 20,
+        fontSize: 18,
+      }}
+    >
+      เขินนะนุด ☺️
+    </p>
 
+    <button
+      onClick={
+        goToComfortStage
+      }
+    >
+      ไปพักผ่อนกับจ้ม 🐾
+    </button>
   </>
 )}
 
