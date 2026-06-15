@@ -44,11 +44,13 @@ const [sadPawVisible, setSadPawVisible] =
 const [happySent, setHappySent] =
   useState(false);
 
-const [happySparkle, setHappySparkle] =
-  useState(false);
 
 const [returnHearts, setReturnHearts] =
   useState(false);
+
+const [sendHeartVisible,
+ setSendHeartVisible] =
+ useState(false);
 
 return ( <div className="emotion-container">
 
@@ -222,7 +224,7 @@ return ( <div className="emotion-container">
     : "happy-breathing"
 }
       />
-{happySent && (
+{sendHeartVisible && (
   <div className="send-heart">
     ❤️
   </div>
@@ -404,17 +406,19 @@ top: `${25 + (i % 2) * 20}%`,
     className="heart-send-btn"
     onClick={() => {
 
-      setHappySent(true);
+  setHappySent(true);
 
-      setTimeout(() => {
-        setHappySparkle(true);
-      }, 1000);
+  setSendHeartVisible(true);
 
-      setTimeout(() => {
-        setReturnHearts(true);
-      }, 1800);
+  setTimeout(() => {
+    setSendHeartVisible(false);
+  }, 1200);
 
-    }}
+  setTimeout(() => {
+    setReturnHearts(true);
+  }, 1500);
+
+}}
   >
     ❤️ ส่งหัวใจให้จ้ม
   </button>
