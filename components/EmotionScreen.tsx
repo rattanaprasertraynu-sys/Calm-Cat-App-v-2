@@ -41,6 +41,26 @@ const [sadStainCount, setSadStainCount] =
 const [sadPawVisible, setSadPawVisible] =
   useState(false);
 
+const [bonusStage,
+ setBonusStage] =
+ useState<
+   "emotion" |
+   "comfort" |
+   "reward" |
+   "farewell"
+ >("emotion");
+
+const [comfortType,
+ setComfortType] =
+ useState<
+   "head" |
+   "belly"
+ >("head");
+
+const [farewellVideo,
+ setFarewellVideo] =
+ useState("");
+
 const [happySent, setHappySent] =
   useState(false);
 
