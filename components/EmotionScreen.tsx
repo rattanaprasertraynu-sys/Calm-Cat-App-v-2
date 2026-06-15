@@ -161,9 +161,24 @@ return (
       src="/cat/cat_tired.png"
       width={220}
       alt="Tired Cat"
+      className={
+        touched
+          ? ""
+          : "tired-breathing"
+      }
+      onClick={() => {
+        if (submitted) {
+          setTouched(true);
+        }
+      }}
     />
 
-    <p>
+    <p
+      style={{
+        marginTop: 16,
+        marginBottom: 20,
+      }}
+    >
       เจ้าเหมียวส้มก็เหนื่อยเหมือนกันเลย...
     </p>
   </>
