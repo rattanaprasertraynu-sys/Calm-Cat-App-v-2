@@ -501,17 +501,19 @@ top: `${25 + (i % 2) * 20}%`,
 {submitted &&
  emotion === "tired" &&
  touched && (
-  <p
-    style={{
-      marginTop: 20,
-      fontSize: 18,
-    }}
-  >
-    ขอบคุณนะ...
-    <br />
-    เจ้าเหมียวเริ่มผ่อนคลายแล้ว 💛
-  </p>
-<button
+  <>
+    <p
+      style={{
+        marginTop: 20,
+        fontSize: 18,
+      }}
+    >
+      ขอบคุณนะ...
+      <br />
+      เจ้าเหมียวเริ่มผ่อนคลายแล้ว 💛
+    </p>
+
+    <button
       onClick={
         goToComfortStage
       }
