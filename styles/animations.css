@@ -430,38 +430,7 @@
   }
 }
 
-.eye-star {
-  position: absolute;
-  font-size: 24px;
-  animation:
-    twinkle 1s ease infinite;
-}
 
-.eye-star.left {
-  left: 70px;
-  top: 80px;
-}
-
-.eye-star.right {
-  right: 70px;
-  top: 80px;
-}
-
-@keyframes twinkle {
-  0% {
-    opacity: 0;
-    transform: scale(0.8);
-  }
-
-  50% {
-    opacity: 1;
-    transform: scale(1.2);
-  }
-
-  100% {
-    opacity: 0;
-  }
-}
 
 .heart-send-btn {
   margin-top: 16px;
