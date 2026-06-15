@@ -492,3 +492,42 @@
       scale(1.6);
   }
 }
+
+.send-heart {
+  position: absolute;
+
+  left: 50%;
+  bottom: -40px;
+
+  font-size: 42px;
+
+  transform:
+    translateX(-50%);
+
+  animation:
+    sendHeartToCat 1.2s ease-out forwards;
+
+  pointer-events: none;
+}
+
+@keyframes sendHeartToCat {
+  0% {
+    opacity: 0;
+    transform:
+      translateX(-50%)
+      translateY(0)
+      scale(0.5);
+  }
+
+  20% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    transform:
+      translateX(-50%)
+      translateY(-180px)
+      scale(1.3);
+  }
+}
