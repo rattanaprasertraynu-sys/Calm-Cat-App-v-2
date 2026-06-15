@@ -441,3 +441,54 @@
   cursor: pointer;
 }
 
+.fly {
+  position: absolute;
+  font-size: 32px;
+  animation:
+    flyToUser 2s ease-out forwards;
+}
+
+.f1 {
+  left: 40%;
+  top: 120px;
+}
+
+.f2 {
+  left: 50%;
+  top: 140px;
+}
+
+.f3 {
+  left: 60%;
+  top: 110px;
+}
+
+.f4 {
+  left: 35%;
+  top: 150px;
+}
+
+.f5 {
+  left: 65%;
+  top: 130px;
+}
+
+@keyframes flyToUser {
+  0% {
+    opacity: 0;
+    transform:
+      translateY(0)
+      scale(0.6);
+  }
+
+  30% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    transform:
+      translateY(250px)
+      scale(1.6);
+  }
+}
