@@ -85,7 +85,8 @@ const goToComfortStage = () => {
   );
 };
 
-return ( <div className="emotion-container">
+return (
+  <div className="emotion-container">
 
 
  {step === "select" && (
@@ -155,32 +156,18 @@ return ( <div className="emotion-container">
 {step === "diary" && (
   <>
     {emotion === "tired" && (
-      <>
-     <img
-  src="/cat/cat_tired.png"
-  width={220}
-  alt="Tired Cat"
-  className={
-    touched
-      ? ""
-      : "tired-breathing"
-  }
-  onClick={() => {
-    if (submitted) {
-      setTouched(true);
-    }
-  }}
-/>
-        <p
-          style={{
-            marginTop: 16,
-            marginBottom: 20,
-          }}
-        >
-          เจ้าเหมียวส้มก็เหนื่อยเหมือนกันเลย...
-        </p>
-      </>
-    )}
+  <>
+    <img
+      src="/cat/cat_tired.png"
+      width={220}
+      alt="Tired Cat"
+    />
+
+    <p>
+      เจ้าเหมียวส้มก็เหนื่อยเหมือนกันเลย...
+    </p>
+  </>
+)}
 
     {emotion === "sad" && (
       <>
