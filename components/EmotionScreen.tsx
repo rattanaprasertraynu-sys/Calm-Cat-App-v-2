@@ -223,17 +223,7 @@ return ( <div className="emotion-container">
         }
       />
 
-      {happySparkle && (
-        <>
-          <div className="eye-star left">
-            ✨
-          </div>
-
-          <div className="eye-star right">
-            ✨
-          </div>
-        </>
-      )}
+      
 
       {returnHearts && (
         <div className="return-hearts">
