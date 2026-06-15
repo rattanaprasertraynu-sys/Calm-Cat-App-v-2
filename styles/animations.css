@@ -402,3 +402,73 @@
 
 }
 
+.happy-cat-wrapper {
+  position: relative;
+}
+
+.happy-breathing {
+  animation:
+    breathe 3s ease-in-out infinite;
+}
+
+.happy-powered {
+  animation:
+    happyPower 0.8s ease;
+}
+
+@keyframes happyPower {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.05);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+.eye-star {
+  position: absolute;
+  font-size: 24px;
+  animation:
+    twinkle 1s ease infinite;
+}
+
+.eye-star.left {
+  left: 70px;
+  top: 80px;
+}
+
+.eye-star.right {
+  right: 70px;
+  top: 80px;
+}
+
+@keyframes twinkle {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+.heart-send-btn {
+  margin-top: 16px;
+  padding: 12px 20px;
+  border-radius: 999px;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+}
+
