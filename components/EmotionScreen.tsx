@@ -222,9 +222,12 @@ return ( <div className="emotion-container">
     : "happy-breathing"
 }
       />
-
+{happySent && (
+  <div className="send-heart">
+    ❤️
+  </div>
+)}
       
-
      {returnHearts && (
   <>
     <div className="fly f1">💛</div>
