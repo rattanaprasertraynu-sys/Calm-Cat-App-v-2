@@ -41,6 +41,15 @@ const [sadStainCount, setSadStainCount] =
 const [sadPawVisible, setSadPawVisible] =
   useState(false);
 
+const [happySent, setHappySent] =
+  useState(false);
+
+const [happySparkle, setHappySparkle] =
+  useState(false);
+
+const [returnHearts, setReturnHearts] =
+  useState(false);
+
 return ( <div className="emotion-container">
 
 
@@ -200,18 +209,51 @@ return ( <div className="emotion-container">
 )}
 
     {emotion === "happy" && (
-      <>
-        <img
-          src="/cat/cat_happy.png"
-          width={220}
-          alt="Happy Cat"
-        />
+  <>
+    <div className="happy-cat-wrapper">
 
-        <p>
-          ใจฟูเลยสินะ 😊
-        </p>
-      </>
-    )}
+      <img
+        src="/cat/cat_happy.png"
+        width={220}
+        alt="Happy Cat"
+        className={
+          happySparkle
+            ? "happy-powered"
+            : "happy-breathing"
+        }
+      />
+
+      {happySparkle && (
+        <>
+          <div className="eye-star left">
+            ✨
+          </div>
+
+          <div className="eye-star right">
+            ✨
+          </div>
+        </>
+      )}
+
+      {returnHearts && (
+        <div className="return-hearts">
+          <div className="r1">💛</div>
+          <div className="r2">🐾</div>
+          <div className="r3">💛</div>
+          <div className="r4">🐾</div>
+          <div className="r5">💛</div>
+        </div>
+      )}
+
+    </div>
+
+    <p>
+      วันนี้มีเรื่องดี ๆ จนใจฟูเลยใช่ไหมคะ?
+      <br />
+      มาส่งพลังใจดวงโตให้เจ้าเหมียวส้มกันเถอะ!
+    </p>
+  </>
+)}
 
  
  <div className="sad-text-wrapper">
@@ -345,6 +387,48 @@ top: `${25 + (i % 2) * 20}%`,
     ส่งให้จ้ม
   </button>
 )}
+
+    {submitted &&
+ emotion === "happy" &&
+ !happySent && (
+  <button
+    className="heart-send-btn"
+    onClick={() => {
+
+      setHappySent(true);
+
+      setTimeout(() => {
+        setHappySparkle(true);
+      }, 1000);
+
+      setTimeout(() => {
+        setReturnHearts(true);
+      }, 1800);
+
+    }}
+  >
+    ❤️ ส่งหัวใจให้จ้ม
+  </button>
+)}
+
+    {submitted &&
+ emotion === "happy" &&
+ happySent && (
+  <p
+    style={{
+      marginTop: 20,
+      fontSize: 18,
+    }}
+  >
+    รับพลังใจดวงนี้กลับไปด้วยนะ!
+    <br />
+    ขอบคุณที่มาแบ่งปันความสุขให้กัน
+    <br />
+    ขอให้หัวใจฟูฟ่องแบบนี้ไปทั้งวันเลยนะ 💛
+  </p>
+)}
+    
+    
    {submitted &&
  emotion === "tired" &&
  !touched && (
