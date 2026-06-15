@@ -155,7 +155,7 @@ return (
 
 {step === "diary" && (
   <>
-    {emotion === "tired" && (
+   {emotion === "tired" && (
   <>
     <img
       src="/cat/cat_tired.png"
@@ -168,7 +168,6 @@ return (
     </p>
   </>
 )}
-
     {emotion === "sad" && (
       <>
         <img
