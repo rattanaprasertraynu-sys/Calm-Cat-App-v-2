@@ -85,6 +85,11 @@ const goToComfortStage = () => {
   );
 };
 
+const comfortVideo =
+  comfortType === "head"
+    ? "/comfort/headpat.mp4"
+    : "/comfort/bellyrub.mp4";
+  
 return (
   <div className="emotion-container">
 
