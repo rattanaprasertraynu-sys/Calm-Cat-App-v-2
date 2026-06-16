@@ -637,8 +637,10 @@ top: `${25 + (i % 2) * 20}%`,
       แต่เจ้าเหมียวส้มรู้ และอยู่ข้าง ๆ เสมอ 💛
     </p>
 
-   <button
-  onClick={onReward}
+  <button
+  onClick={() =>
+    setBonusStage("reward")
+  }
 >
   รับของขวัญ 🎁
 </button>
