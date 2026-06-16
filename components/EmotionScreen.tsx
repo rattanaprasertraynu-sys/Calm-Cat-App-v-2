@@ -57,7 +57,13 @@ const [comfortType,
    "belly"
  >("head");
 
-const [farewellVideo,
+  const [rewardStep,
+ setRewardStep] =
+ useState(1);
+
+  
+ 
+  const [farewellVideo,
  setFarewellVideo] =
  useState("");
 
