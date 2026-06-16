@@ -153,7 +153,8 @@ return (
   </>
 )}
 
-{step === "diary" && (
+{step === "diary" &&
+ bonusStage === "emotion" && (
   <>
    {emotion === "tired" && (
   <>
@@ -590,6 +591,46 @@ top: `${25 + (i % 2) * 20}%`,
   </>
 )}
 
+{bonusStage === "comfort" && (
+  <div className="comfort-stage">
+
+    <video
+      width={300}
+      autoPlay
+      loop
+      muted
+    >
+      <source
+        src={comfortVideo}
+        type="video/mp4"
+      />
+    </video>
+
+    <p
+      style={{
+        marginTop: 20,
+        lineHeight: 1.8,
+      }}
+    >
+      ภูมิใจในตัวเองให้มาก ๆ นะ
+      <br />
+      ถึงคนอื่นจะไม่รู้ว่าวันนี้เธอต้องพยายามขนาดไหน
+      <br />
+      แต่เจ้าเหมียวส้มรู้ และอยู่ข้าง ๆ เสมอ 💛
+    </p>
+
+    <button
+      onClick={() =>
+        setBonusStage(
+          "reward"
+        )
+      }
+    >
+      รับของขวัญ 🎁
+    </button>
+
+  </div>
+)}
 </div>
 
 );
