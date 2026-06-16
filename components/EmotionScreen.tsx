@@ -10,7 +10,14 @@ type EmotionType =
 | "normal"
 | "happy";
 
-export default function EmotionScreen() {
+type EmotionScreenProps = {
+  onReward: () => void;
+};
+
+export default function EmotionScreen({
+  onReward,
+}: EmotionScreenProps) {
+  
 const [emotion, setEmotion] =
   useState<EmotionType | null>(null);
 
@@ -630,15 +637,11 @@ top: `${25 + (i % 2) * 20}%`,
       แต่เจ้าเหมียวส้มรู้ และอยู่ข้าง ๆ เสมอ 💛
     </p>
 
-    <button
-      onClick={() =>
-        setBonusStage(
-          "reward"
-        )
-      }
-    >
-      รับของขวัญ 🎁
-    </button>
+   <button
+  onClick={onReward}
+>
+  รับของขวัญ 🎁
+</button>
 
   </div>
 )}
