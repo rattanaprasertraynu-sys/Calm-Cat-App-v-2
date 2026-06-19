@@ -54,6 +54,7 @@ const [bonusStage,
    "comfort" |
    "reward" |
    "farewell"
+   "logo"
  >("emotion");
 
 const [comfortType,
@@ -190,9 +191,31 @@ useEffect(() => {
     const timer =
       setTimeout(() => {
 
-        window.location.reload();
+        setBonusStage(
+          "logo"
+        );
 
       }, 5000);
+
+    return () =>
+      clearTimeout(timer);
+  }
+
+}, [bonusStage]);
+
+  useEffect(() => {
+
+  if (
+    bonusStage ===
+    "logo"
+  ) {
+
+    const timer =
+      setTimeout(() => {
+
+        window.location.reload();
+
+      }, 3000);
 
     return () =>
       clearTimeout(timer);
@@ -805,6 +828,32 @@ top: `${25 + (i % 2) * 20}%`,
   >
     มีความสุข สบายใจนะนุด 🐾
   </p>
+
+</div>
+
+)}
+
+  {bonusStage === "logo" && (
+
+<div
+  style={{
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    minHeight: "100vh",
+  }}
+>
+
+  <video
+    autoPlay
+    muted
+    playsInline
+  >
+    <source
+      src="/logo/calmcat_logo.mp4"
+      type="video/mp4"
+    />
+  </video>
 
 </div>
 
