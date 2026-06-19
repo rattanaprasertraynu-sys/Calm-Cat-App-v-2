@@ -53,7 +53,7 @@ const [bonusStage,
    "emotion" |
    "comfort" |
    "reward" |
-   "farewell"
+   "farewell" |
    "logo"
  >("emotion");
 
