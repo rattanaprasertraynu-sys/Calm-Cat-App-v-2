@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import "../styles/animations.css";
+import { rewards } from "../data/rewards";
 
 type EmotionType =
 | "tired"
@@ -64,16 +65,49 @@ const [comfortType,
    "belly"
  >("head");
 
-  const [rewardStep,
- setRewardStep] =
- useState(1);
-
   
+const [rewardVideo,
+ setRewardVideo] =
+ useState("");
+
+const [rewardAudio,
+ setRewardAudio] =
+ useState("");
+
+const [rewardMessage,
+ setRewardMessage] =
+ useState("");  
  
   const [farewellVideo,
  setFarewellVideo] =
  useState("");
 
+  const farewellVideos = [
+ "/farewell/cat_dance.mp4",
+ "/farewell/cat_wave_heart.mp4",
+ "/farewell/cat_wave_left.mp4",
+ "/farewell/cat_wave_left_right.mp4",
+];
+
+  const startFarewell = () => {
+
+ const randomVideo =
+   farewellVideos[
+     Math.floor(
+       Math.random() *
+       farewellVideos.length
+     )
+   ];
+
+ setFarewellVideo(
+   randomVideo
+ );
+
+ setBonusStage(
+   "farewell"
+ );
+};
+  
 const [happySent, setHappySent] =
   useState(false);
 
@@ -102,7 +136,33 @@ const comfortVideo =
   comfortType === "head"
     ? "/comfort/headpat.mp4"
     : "/comfort/bellyrub.mp4";
-  
+
+  const startRewardStage = () => {
+
+ const randomReward =
+   rewards[
+     Math.floor(
+       Math.random() *
+       rewards.length
+     )
+   ];
+
+ setRewardVideo(
+   randomReward.video
+ );
+
+ setRewardAudio(
+   randomReward.audio
+ );
+
+ setRewardMessage(
+   randomReward.message
+ );
+
+ setBonusStage("reward");
+};
+
+
 return (
   <div className="emotion-container">
 
@@ -638,8 +698,8 @@ top: `${25 + (i % 2) * 20}%`,
     </p>
 
   <button
-  onClick={() =>
-    setBonusStage("reward")
+  onClick={
+    startRewardStage
   }
 >
   รับของขวัญ 🎁
@@ -647,6 +707,76 @@ top: `${25 + (i % 2) * 20}%`,
 
   </div>
 )}
+
+{bonusStage === "reward" && (
+
+<div className="reward-stage">
+
+  <video
+    width={300}
+    autoPlay
+    loop
+    muted
+    playsInline
+  >
+    <source
+      src={rewardVideo}
+      type="video/mp4"
+    />
+  </video>
+
+  <p
+    style={{
+      marginTop: 20,
+      lineHeight: 1.8,
+    }}
+  >
+    {rewardMessage}
+  </p>
+
+  <audio
+    autoPlay
+    src={rewardAudio}
+  />
+
+  <button
+  onClick={startFarewell}
+>
+  ไปต่อ 🐾
+</button>
+
+</div>
+
+)}
+
+{bonusStage === "farewell" && (
+
+<div className="farewell-stage">
+
+  <video
+    width={300}
+    autoPlay
+    muted
+    playsInline
+  >
+    <source
+      src={farewellVideo}
+      type="video/mp4"
+    />
+  </video>
+
+  <p
+    style={{
+      marginTop: 20,
+    }}
+  >
+    มีความสุข สบายใจนะนุด 🐾
+  </p>
+
+</div>
+
+)}
+    
 </div>
 
 );
