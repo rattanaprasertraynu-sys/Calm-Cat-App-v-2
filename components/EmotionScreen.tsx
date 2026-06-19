@@ -11,13 +11,8 @@ type EmotionType =
 | "normal"
 | "happy";
 
-type EmotionScreenProps = {
-  onReward: () => void;
-};
 
-export default function EmotionScreen({
-  onReward,
-}: EmotionScreenProps) {
+export default function EmotionScreen() {
   
 const [emotion, setEmotion] =
   useState<EmotionType | null>(null);
