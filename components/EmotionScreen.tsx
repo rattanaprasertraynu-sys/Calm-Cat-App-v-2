@@ -1,6 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import {
+  useState,
+  useEffect,
+} from "react";
 import "../styles/animations.css";
 import { rewards } from "../data/rewards";
 
@@ -157,7 +160,46 @@ const comfortVideo =
  setBonusStage("reward");
 };
 
+useEffect(() => {
 
+  if (
+    bonusStage === "reward"
+  ) {
+
+    const timer =
+      setTimeout(() => {
+
+        startFarewell();
+
+      }, 4000);
+
+    return () =>
+      clearTimeout(timer);
+  }
+
+}, [bonusStage]);
+
+
+  useEffect(() => {
+
+  if (
+    bonusStage ===
+    "farewell"
+  ) {
+
+    const timer =
+      setTimeout(() => {
+
+        window.location.reload();
+
+      }, 5000);
+
+    return () =>
+      clearTimeout(timer);
+  }
+
+}, [bonusStage]);
+  
 return (
   <div className="emotion-container">
 
@@ -710,7 +752,6 @@ top: `${25 + (i % 2) * 20}%`,
   <video
     width={300}
     autoPlay
-    loop
     muted
     playsInline
   >
@@ -734,11 +775,7 @@ top: `${25 + (i % 2) * 20}%`,
     src={rewardAudio}
   />
 
-  <button
-  onClick={startFarewell}
->
-  ไปต่อ 🐾
-</button>
+ 
 
 </div>
 
@@ -752,6 +789,7 @@ top: `${25 + (i % 2) * 20}%`,
     width={300}
     autoPlay
     muted
+    loop
     playsInline
   >
     <source
