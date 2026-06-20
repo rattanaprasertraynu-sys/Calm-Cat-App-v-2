@@ -50,12 +50,14 @@ const [sadPawVisible, setSadPawVisible] =
 const [bonusStage,
  setBonusStage] =
  useState<
+   "intro" |
+   "welcome" |
    "emotion" |
    "comfort" |
    "reward" |
    "farewell" |
    "logo"
- >("emotion");
+>("emotion");
 
 const [comfortType,
  setComfortType] =
@@ -107,7 +109,18 @@ const [rewardMessage,
  );
 };
   
-const [happySent, setHappySent] =
+const introVideos = [
+  "/intro/butterfly.mp4",
+  "/intro/dancing.mp4",
+  "/intro/flower.mp4",
+  "/intro/yarn.mp4",
+];
+
+const [introVideo,
+ setIntroVideo] =
+ useState("");
+  
+  const [happySent, setHappySent] =
   useState(false);
 
 
@@ -163,6 +176,44 @@ const comfortVideo =
 
 useEffect(() => {
 
+  const randomVideo =
+    introVideos[
+      Math.floor(
+        Math.random() *
+        introVideos.length
+      )
+    ];
+
+  setIntroVideo(
+    randomVideo
+  );
+
+}, []);
+
+  useEffect(() => {
+
+  if (
+    bonusStage ===
+    "intro"
+  ) {
+
+    const timer =
+      setTimeout(() => {
+
+        setBonusStage(
+          "welcome"
+        );
+
+      }, 5000);
+
+    return () =>
+      clearTimeout(timer);
+  }
+
+}, [bonusStage]);
+  
+  useEffect(() => {
+  
   if (
     bonusStage === "reward"
   ) {
@@ -225,9 +276,9 @@ useEffect(() => {
   
 return (
   <div className="emotion-container">
-
-
- {step === "select" && (
+  
+ {step === "select" && 
+    bonusStage === "emotion" && (
   <>
     <img
       src="/cat/cat_idle.png"
@@ -728,8 +779,81 @@ top: `${25 + (i % 2) * 20}%`,
 
   </>
 )}
+    {bonusStage === "intro" && (
 
-{bonusStage === "comfort" && (
+<div
+  style={{
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    minHeight: "100vh",
+  }}
+>
+
+  <video
+    autoPlay
+    muted
+    playsInline
+    style={{
+      width: "100%",
+      maxWidth: "500px",
+    }}
+  >
+    <source
+      src={introVideo}
+      type="video/mp4"
+    />
+  </video>
+
+  <audio
+    autoPlay
+    src="/intro/intro_music.mp3"
+  />
+
+</div>
+
+)}
+    
+   
+    {bonusStage === "welcome" && (
+
+<div
+  style={{
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    minHeight: "100vh",
+    textAlign: "center",
+  }}
+>
+
+  <h1>Calm Cat App</h1>
+
+  <p>
+    จ้มพร้อมฟังนุดเสมอนะ 🐾
+  </p>
+
+  {/* วางปุ่มตรงนี้ */}
+  <button
+  onClick={() => {
+
+    setStep("select");
+
+    setBonusStage(
+      "emotion"
+    );
+
+  }}
+>
+  เริ่มเลย
+</button>
+
+</div>
+
+)}
+    
+    {bonusStage === "comfort" && (
   <div className="comfort-stage">
 
     <video
@@ -767,6 +891,8 @@ top: `${25 + (i % 2) * 20}%`,
 
   </div>
 )}
+
+    
 
 {bonusStage === "reward" && (
 
