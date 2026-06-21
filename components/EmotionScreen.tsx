@@ -110,8 +110,12 @@ const [rewardMessage,
 };
   
 const introVideos = [
-   "/intro/dancing.mp4",
+  "/intro/butterfly.mp4",
+  "/intro/dancing.mp4",
+  "/intro/flower.mp4",
+  "/intro/yarn.mp4",
 ];
+
 
 const [introVideo,
  setIntroVideo] =
@@ -776,40 +780,37 @@ top: `${25 + (i % 2) * 20}%`,
 
   </>
 )}
-    {bonusStage === "intro" && (
+   {bonusStage === "intro" && (
 
 <div
   style={{
-    position: "fixed",
-    inset: 0,
-    background: "#fff",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    zIndex: 9999,
+    minHeight: "100vh",
   }}
 >
-
-<p>
-    Intro = {introVideo}
-  </p>
 
   <video
     src={introVideo}
     autoPlay
     muted
     playsInline
-    controls
     style={{
-      width: "500px",
-      height: "500px",
-      border: "3px solid red",
+      width: "100%",
+      maxWidth: "500px",
     }}
+  />
+
+  <audio
+    autoPlay
+    src="/intro/intro_music.mp3"
   />
 
 </div>
 
 )}
+
     
    
     {bonusStage === "welcome" && (
