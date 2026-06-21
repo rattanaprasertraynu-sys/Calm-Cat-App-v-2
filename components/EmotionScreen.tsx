@@ -57,7 +57,7 @@ const [bonusStage,
    "reward" |
    "farewell" |
    "logo"
->("emotion");
+>("intro");
 
 const [comfortType,
  setComfortType] =
