@@ -790,7 +790,12 @@ top: `${25 + (i % 2) * 20}%`,
   }}
 >
 
+<p>
+    Intro = {introVideo}
+  </p>
+
   <video
+    src={introVideo}
     autoPlay
     muted
     playsInline
@@ -800,12 +805,7 @@ top: `${25 + (i % 2) * 20}%`,
       height: "500px",
       border: "3px solid red",
     }}
-  >
-    <source
-      src={introVideo}
-      type="video/mp4"
-    />
-  </video>
+  />
 
 </div>
 
