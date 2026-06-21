@@ -111,9 +111,6 @@ const [rewardMessage,
   
 const introVideos = [
   "/intro/butterfly.mp4",
-  "/intro/dancing.mp4",
-  "/intro/flower.mp4",
-  "/intro/yarn.mp4",
 ];
 
 const [introVideo,
