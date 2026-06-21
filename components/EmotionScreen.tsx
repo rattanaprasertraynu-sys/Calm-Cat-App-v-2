@@ -783,33 +783,17 @@ top: `${25 + (i % 2) * 20}%`,
 
 <div
   style={{
+    position: "fixed",
+    inset: 0,
+    background: "yellow",
+    zIndex: 9999,
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    minHeight: "100vh",
+    fontSize: "40px",
   }}
 >
-
-  <video
-    autoPlay
-    muted
-    playsInline
-    style={{
-      width: "100%",
-      maxWidth: "500px",
-    }}
-  >
-    <source
-      src={introVideo}
-      type="video/mp4"
-    />
-  </video>
-
-  <audio
-    autoPlay
-    src="/intro/intro_music.mp3"
-  />
-
+  INTRO TEST
 </div>
 
 )}
