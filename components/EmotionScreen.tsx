@@ -110,7 +110,7 @@ const [rewardMessage,
 };
   
 const introVideos = [
-  "/intro/butterfly.mp4",
+   "/intro/dancing.mp4",
 ];
 
 const [introVideo,
